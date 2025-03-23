@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const dbTestRoute = require("./routes/dbTest.js");
 const path = require("path");
-const mongoproducts = require("../mongoproducts.js");
+const mongoproducts = require("./models/mongoproducts.js");
 
 dotenv.config();
 
@@ -35,6 +35,7 @@ async function run() {
             price: 19.99,
             description: "En god exotisk frukt",
             stock: 100,
+            category: "Fruit"
 
         })
         console.log(mongoproduct1)
@@ -52,6 +53,7 @@ app.post('/products', async (req, res) => {
             price, 
             description,
             stock,
+            category
         });
 
         await newProduct.save();
@@ -73,7 +75,7 @@ app.get('/products', async (req, res) => {
     }
 });
 
-app.use("/test-db", dbTestRoute);
+// app.use("/test-db", dbTestRoute);
 
 app.use(express.static(path.resolve(__dirname, '..')));
 

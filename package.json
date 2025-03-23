@@ -1,7 +1,6 @@
 {
   "name": "be-webshop-2025-fe",
   "version": "1.0.0",
-  "type": "module",
   "main": "src/server.js",
   "scripts": {
     "start": "node server.js",
