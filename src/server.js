@@ -75,7 +75,7 @@ app.get('/products', async (req, res) => {
     }
 });
 
-// app.use("/test-db", dbTestRoute);
+app.use("/test-db", dbTestRoute);
 
 app.use(express.static(path.resolve(__dirname, '..')));
 
