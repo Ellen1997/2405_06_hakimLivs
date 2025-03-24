@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const mongoproducts = require("../models/mongoproducts.js");
 
 
@@ -100,7 +99,7 @@ router.put('/:id', async (req, res) => {
 })
 
 
-//DELETE
+//delete
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
