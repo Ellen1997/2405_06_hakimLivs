@@ -27,7 +27,29 @@ mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbre
         console.error("MongoDB atlas connection error:", e)
     );
 
+<<<<<<< HEAD
 app.use("/products", mongproductsRoute);
+=======
+        await newProduct.save();
+        res.status(201).send({ message: "Produkt skapad", product: newProduct });
+
+
+    } catch (error) {
+        res.status(500).send({ message: "Något gick fel, produkt ej inlagd", error: error.message});
+    }
+})
+
+app.get('/products', async (req, res) => {
+    try {
+       
+        const products = await mongoproducts.find();
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).send({ message: "Något gick fel", error: error.message });
+    }
+});
+
+>>>>>>> a7ca8b855f731aad490b76b3675a92b3637d2543
 app.use("/test-db", dbTestRoute);
 
 app.use(express.static(path.resolve(__dirname, '..')));
