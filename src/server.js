@@ -30,10 +30,12 @@ app.use("/products", mongproductsRoute);
 
 app.use(express.static(path.resolve(__dirname, '..')));
 
+//denna app.get '/hem' under behövs inte egentligen, den är bara där från en test grej. 
+// Tydligen om inget annat är definerat så söker servern efter ett index.html
 app.get('/hem', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 app.get('/test', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'indexxx.html'));
-});
+    res.sendFile(path.join(__dirname, '__tests__', 'indexxx.html'));
+}); 

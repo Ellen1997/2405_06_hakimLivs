@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST Produkter TEST</title>
+</head>
+
+<body>
+    <h1>Produktlista</h1>
+
+  
+    <button id="products-btn">Hämta alla produkter</button>
+
+    
+    <ul id="product-list" class="product-list"></ul>
+
+    <script>
+    
+        const productsBtn = document.getElementById('products-btn');
+        const productList = document.getElementById('product-list');
+
+        
+        const loadProducts = async () => {
+            try {
+                const response = await fetch('http://localhost:5500/products');
+                const products = await response.json();
+
+            
+                productList.innerHTML = '';
+
+                
+                products.forEach(product => {
+                    const productItem = document.createElement('li');
+                    productItem.classList.add('product-item');
+                    productItem.innerHTML = `${product.name} - ${product.price} kr 
+                    <p>
+                        ${product.img}
+                        </p>`;
+                    productList.appendChild(productItem);
+                });
+            } catch (error) {
+                console.error('Det gick inte att hämta produkterna:', error);
+            }
+        };
+
+        productsBtn.addEventListener('click', loadProducts);
+    </script>
+
+</body>
+</html>

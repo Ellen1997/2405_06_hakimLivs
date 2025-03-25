@@ -5,7 +5,18 @@ const mongoproducts = require("../models/mongoproducts.js");
 const router = express.Router();
 
 
+ // la in denna senare!!Detta är så man kan söka mellan kategorier, vi kommer behöva den sen. 
+ router.get("/", async (req, res) => {
+    try {
+        const category = req.query.category;
+        const query = category ? { category: category} : {};
 
+        const products = await mongoproducts.find(query);
+        res.status(200).json(products);
+    }catch (error) {
+        res.status(500).send({ message: "Något gick fel", error: error.message });
+    }
+});
 
 //GET metod
 router.get('/', async (req, res) => {
@@ -33,25 +44,14 @@ router.get('/:id', async (req, res) => {
     }
 })
 
- // la in denna senare!!Detta är så man kan söka mellan kategorier, vi kommer behöva den sen. 
-router.get("/", async (req, res) => {
-    try {
-        const category = req.query.category;
-        const query = category ? { category: category} : {};
 
-        const products = await mongoproducts.find(query);
-        res.status(200).json(products);
-    }catch (error) {
-        res.status(500).send({ message: "Något gick fel", error: error.message });
-    }
-});
 
 //POST
 router.post('/', async (req, res) => {
     try {
-        const {name, price, description, stock, category} = req.body;
+        const {name, price, description, stock, category, img} = req.body;
 
-        if (!name || !price || !description || !stock || !category) {
+        if (!name || !price || !description || !stock || !category || !img) {
             return res.status(400).json({ message: 'Fyll i alla fält för att skapa produkt' });
         }
 
@@ -60,7 +60,8 @@ router.post('/', async (req, res) => {
             price,
             description,
             stock,
-            category
+            category,
+            img
         });
 
 
@@ -78,7 +79,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const { name, description, price, stock, category } = req.body;
+        const { name, description, price, stock, category, img } = req.body;
 
 
         const product = await mongoproducts.findById(id)
@@ -94,6 +95,7 @@ router.put('/:id', async (req, res) => {
         product.price = price || product.price;
         product.stock = stock || product.stock;
         product.category = category || product.category;
+        product.name = img || product.img;
 
 
         await product.save();
