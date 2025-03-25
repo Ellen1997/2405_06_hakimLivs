@@ -33,3 +33,7 @@ app.use(express.static(path.resolve(__dirname, '..')));
 app.get('/hem', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
+
+app.get('/test', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'indexxx.html'));
+});
