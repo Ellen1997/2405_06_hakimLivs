@@ -22,19 +22,13 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
 
-
         const product = await mongoproducts.findById(req.params.id);
-
 
         if (!product) {
             return res.status(404).send({message: 'Produkt inte hittad!'})
         }
-
-
         res.status(200).json(product);
-
-
-    }catch (error) {
+    } catch (error) {
         res.status(500).send({message: 'Något gick fel', error})
     }
 })
