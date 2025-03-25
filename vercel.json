@@ -17,11 +17,15 @@
     },
     {
       "src": "/test",
-      "dest": "/__test__/indexxx.html"
+      "dest": "/public/__tests__/indexxx.html"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/public/index.html"
     }
   ]
 }
