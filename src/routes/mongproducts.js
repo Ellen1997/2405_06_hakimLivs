@@ -34,19 +34,6 @@ router.get('/:id', async (req, res) => {
 })
 
 
-//GET metod
-router.get('/', async (req, res) => {
-    try {
-        const products = await mongoproducts.find();
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).send({ message: "Något gick fel", error: error.message });
-    }
-});
-
-
-
-
 //POST
 router.post('/', async (req, res) => {
     try {
