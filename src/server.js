@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const dbTestRoute = require("./routes/dbTest.js");
 const mongproductsRoute = require("./routes/mongproducts.js");
 const path = require("path");
 const mongoproducts = require("./models/mongoproducts.js");
@@ -28,7 +27,7 @@ mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbre
     );
 
 app.use("/products", mongproductsRoute);
-app.use("/test-db", dbTestRoute);
+
 
 app.use(express.static(path.resolve(__dirname, '..')));
 
