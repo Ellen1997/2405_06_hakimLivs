@@ -12,7 +12,7 @@
   ],
   "routes": [
     {
-      "src": "/api/products",
+      "src": "/api/products/(.*)",
       "dest": "src/server.js"
     },
     {

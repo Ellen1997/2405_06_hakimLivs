@@ -8,6 +8,8 @@ const path = require("path");
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 
 
 app.use(cors());
@@ -17,6 +19,9 @@ app.use(express.json());
 mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbreq.mongodb.net/?retryWrites=true&w=majority&appName=expresscrash")
     .then(() => {
         console.log("Connected to MongoDB ATLAS");
+        app.listen(PORT, () => {
+            console.log(`Servern körs på http://localhost:${PORT}`);
+        });
     })
     .catch((e) =>
         console.error("MongoDB Atlas connection error:", e)
@@ -24,7 +29,7 @@ mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbre
 
 app.use("/api/products", mongproductsRoute);
 
-app.use(express.static(path.resolve(__dirname, '..')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 
 app.get('*', (req, res) => {
