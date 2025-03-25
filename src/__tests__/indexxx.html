@@ -33,10 +33,9 @@
                 products.forEach(product => {
                     const productItem = document.createElement('li');
                     productItem.classList.add('product-item');
-                    productItem.innerHTML = `${product.name} - ${product.price} kr 
-                    <p>
-                        ${product.img}
-                        </p>`;
+                    productItem.innerHTML = `<h3> ${product.name} - ${product.price} kr </h3>
+                    <img src="${product.img}" alt="${product.name}" style="width: 50px;">
+                    `;
                     productList.appendChild(productItem);
                 });
             } catch (error) {
