@@ -95,7 +95,7 @@ router.put('/:id', async (req, res) => {
         product.price = price || product.price;
         product.stock = stock || product.stock;
         product.category = category || product.category;
-        product.name = img || product.img;
+        product.img = img || product.img;
 
 
         await product.save();
