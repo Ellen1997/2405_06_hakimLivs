@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 
-mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbreq.mongodb.net/?retryWrites=true&w=majority&appName=expresscrash")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("connected to MongoDB ATLAS");
         // app.listen(PORT, () => {
