@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 
-mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbreq.mongodb.net/?retryWrites=true&w=majority&appName=expresscrash")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("connected to MongoDB ATLAS");
         // app.listen(PORT, () => {
@@ -29,16 +29,9 @@ mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbre
     );
 
 app.use("/products", mongproductsRoute);
+app.use("/test-db", dbTestRoute);
 
-// app.use(express.static(path.resolve(__dirname, '..')));
-
-//denna app.get '/hem' under behövs inte egentligen, den är bara där från en test grej. 
-// Tydligen om inget annat är definerat så söker servern efter ett index.html
-
-
-// app.get('/hem', (req, res) => {
-//     res.sendFile(path.join(__dirname, '..', 'index.html'));
-// });
+app.use(express.static(path.resolve(__dirname, '..')));
 
 app.get('/test', (req, res) => {
     res.sendFile(path.join(__dirname, '__tests__', 'indexxx.html'));
