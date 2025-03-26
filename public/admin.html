@@ -13,7 +13,7 @@
     <div class="admin-page-container">
         <div class="admin-menu-container">
             <p class="admin-menu-username">${user}</p>
-            <hr>
+            <hr class="admin-hr">
             <div class="admin-menulinks-container">
                 <div class="admin-a-link-img-div">
                     <img src="home.png" alt="" width="20px">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="admin-a-link-img-div">
                     <img src="products.png" alt="" width="20px">
-                    <a href="index.html" class="admin-menu-a-link">Produkter</a>
+                    <a href="products.html" class="admin-menu-a-link">Produkter</a>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
             <div class="admin-title-container">
                 <h2 class="admin-h2-add-product">Addera ny produkt</h2>
                 <div class="admin-title-buttons-container">
-                    <button>Avbryt</button>
+                    <button class="cancel-button">Avbryt</button>
                     <button class="button">Spara</button>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <input type="text" name="product-description" id="product-description">
                     <label for="admin-dropdown-category" class="admin-input-label">Kategori</label>
                     <select name="category" id="admin-dropdown-category">
-                        <option value="" disabled selected>Välj din kategori</option>
+                        <option value="" disabled selected>Välj kategori</option>
                         <option value="pantry">Skafferi</option>
                         <option value="drink">Dryck</option>
                         <option value="bread">Bröd, kex & kakor</option>
@@ -55,14 +55,18 @@
                         <option value="pets">Husdjur</option>
                         <option value="eco">Eko</option>
                     </select>
-                    <div>
-                        <label for="product-price" class="admin-input-label">Pris (i kr)</label>
-                        <input type="number" name="product-price" id="product-price">
-                        <label for="product-stock" class="admin-input-label">Lager saldo</label>
-                        <input type="number" name="product-stock" id="product-stock">
+                    <div class="price-stock-container">
+                        <div class="price-container">
+                            <label for="product-price" class="admin-input-label">Pris (i kr)</label>
+                            <input type="number" name="product-price" id="product-price">
+                        </div>
+                        <div class="stock-container">
+                            <label for="product-stock" class="admin-input-label">Lager saldo</label>
+                            <input type="number" name="product-stock" id="product-stock">
+                        </div>
                     </div>
                     <label for="product-image" class="admin-input-label">Produktbild</label>
-                    <input type="file" id="product-image" accept="image/*">
+                    <input type="file" id="product-image" accept="image/*" class="admin-img-input">
 
                 </div>
             </div>
