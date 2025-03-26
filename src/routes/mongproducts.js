@@ -18,17 +18,6 @@ const router = express.Router();
     }
 });
 
-//GET metod
-router.get('/', async (req, res) => {
-    try {
-        const products = await mongoproducts.find();
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).send({ message: "Något gick fel", error: error.message });
-    }
-});
-
-
 //GET by ID
 router.get('/:id', async (req, res) => {
     try {
@@ -43,7 +32,6 @@ router.get('/:id', async (req, res) => {
         res.status(500).send({message: 'Något gick fel', error})
     }
 })
-
 
 
 //POST
