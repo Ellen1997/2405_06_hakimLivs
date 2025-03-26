@@ -124,7 +124,8 @@ border-radius: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 85%;
+  width: 80%;
+  margin: 1%;
 }
 
 .product-header{
@@ -153,7 +154,6 @@ border-radius: 10px;
   background-color: var(--box-color);
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   align-items: center;
   margin-right: 4%;
   margin-top: 2%;
