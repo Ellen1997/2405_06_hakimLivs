@@ -220,21 +220,37 @@ input{
 }
 
 /* Footer */
-.site-footer {
-  background: #eaeaea;
+footer.footer{
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+}
+.footer-container {
+  background: var(--button-blue);
+  width: 100%;
+  height: 15%;
   padding: 1rem;
   text-align: center;
 }
 
+#footer-rights{
+  color: var(--primary-button-text-color);
+}
+
+.footer-icons{
+ padding: 2%;
+}
+
 .footer-links {
   display: flex;
-  gap: 1rem;
   justify-content: center;
+  gap: 2%;
+  margin: 1%;
 }
 
 .footer-links a {
   text-decoration: none;
-  color: black;
+  color: var(--box-color);
 }
 
 /* Admin page*/
