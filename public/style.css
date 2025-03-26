@@ -89,11 +89,23 @@ h2 {
 }
 
 /* Products */
+.productPage-mainContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.leftMenuContainer{
+  background-color: purple;
+  height: 100vh;
+  width: 15%;
+}
+
 .product-mainContainer{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 85%;
 }
 
 .product-header{
