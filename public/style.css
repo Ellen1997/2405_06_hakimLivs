@@ -1,7 +1,12 @@
 :root {
-  font-family: Arial, sans-serif;
-  color: #333;
-  background-color: #fff;
+  font-family: "Archivo", sans-serif;
+  --primery-text-color: #333;
+  --background-color: #efefef;
+  --box-color: #ffffff;
+  --light-blue: #D3D4F5;
+  --button-blue: #2426CC;
+  --title-color: #011E62;
+  --price-color-red: #F90035;
 }
 
 body {
