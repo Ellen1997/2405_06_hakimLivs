@@ -13,6 +13,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background-color);
 }
 
 /* Header */
@@ -104,4 +105,63 @@ body {
 .footer-links a {
   text-decoration: none;
   color: black;
+}
+
+/* Admin page*/
+.admin-page-container{
+  display: flex;
+}
+.admin-menu-container{
+  background-color: var(--light-blue);
+  height: 100vh;
+  width: 15%;
+}
+.admin-menulinks-container{
+  display: flex;
+  flex-direction: column;
+}
+.admin-a-link-img-div{
+  display: flex;
+  align-items: flex-end;
+  margin: 4%;
+}
+.admin-menu-a-link{
+  margin-left: 4%;
+  text-decoration: none;
+  color: black;
+}
+.admin-title-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--box-color);
+  width: 85vw;
+  height: 15%;
+}
+.admin-h2-add-product{
+  margin-left: 3%;
+}
+.admin-title-buttons-container{
+  margin-right: 10%;
+}
+.admin-product-inputfield-container{
+  display: flex;
+  background-color: var(--box-color);
+  margin: 1% 1%;
+  padding: 2%;
+}
+.admin-product-inputs{
+  display: flex;
+  flex-direction: column;
+  margin-left: 3%;
+  gap: 2%;
+  
+}
+.admin-input-label{
+  color: var(--primery-text-color);
+}
+.admin-save-button-container{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10%;
 }
