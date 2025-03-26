@@ -43,6 +43,13 @@ fieldset{
   border: none;
   color: #5A5A5A;
   font-weight:500;
+  padding: 0;
+}
+
+h2 {
+  color: var(--title-color);
+  font-weight:900;
+  font-style: italic;
 }
 
 /* Header */
@@ -120,6 +127,15 @@ fieldset{
   margin-right: 4%;
   margin-top: 2%;
   padding: 2%
+}
+
+.price{
+  color: var(--price-color-red);
+}
+
+.productImg{
+  height: 50%;
+  width: 20%;
 }
 
 /* Login */
