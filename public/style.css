@@ -1,18 +1,47 @@
 :root {
   font-family: "Archivo", sans-serif;
-  --primery-text-color: #333;
+  --primary-text-color: #333;
+  --primary-button-text-color: #ffffff;
   --background-color: #efefef;
   --box-color: #ffffff;
   --light-blue: #D3D4F5;
   --button-blue: #2426CC;
   --title-color: #011E62;
   --price-color-red: #F90035;
+  --frame-grey: #757575;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+.button {
+  height: 30px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--button-blue);
+  color: var(--primary-button-text-color);
+  cursor: pointer;
+  }
+
+select {
+  display: flex;
+  width: 4rem;
+  height: 30px;
+  gap: 10px;
+  border: 1px solid var(--frame-grey);
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--primary-text-color);
+}
+
+fieldset{
+  border: none;
+  color: #5A5A5A;
+  font-weight:500;
 }
 
 /* Header */
@@ -52,23 +81,44 @@ body {
 }
 
 /* Products */
-#products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+.product-mainContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.product-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  text-align: center;
+.product-header{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
-.product-card button {
-  background: lightgray;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+.product-filterAndSortContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.productCardsContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.productCard{
+  background-color: var(--box-color);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  align-items: center;
+  margin-right: 4%;
+  margin-top: 2%;
+  padding: 2%
 }
 
 /* Login */
