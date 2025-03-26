@@ -288,6 +288,7 @@ border-radius: 10px;
 }
 .admin-img-input{
   border: none;
+  padding: 1px;
 }
 .admin-save-button-container{
   display: flex;
