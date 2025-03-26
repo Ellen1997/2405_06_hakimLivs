@@ -19,20 +19,21 @@ body {
 }
 
 .button {
-  height: 30px;
-  width: 100%;
+  font-size: 14px;
+  padding: 10px 30px;
   border: none;
   border-radius: 10px;
   background-color: var(--button-blue);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
   color: var(--primary-button-text-color);
   cursor: pointer;
   }
 
 select {
   display: flex;
-  width: 4rem;
+  width: 100%;
+  max-width: 200px;
   height: 30px;
-  gap: 10px;
   border: 1px solid var(--frame-grey);
   border-radius: 5px;
   background-color: transparent;
@@ -43,6 +44,11 @@ fieldset{
   border: none;
   color: #5A5A5A;
   font-weight:500;
+}
+input{
+  border-radius: 5px;
+  border: 1px solid var(--frame-grey);
+  height: 30px;
 }
 
 /* Header */
