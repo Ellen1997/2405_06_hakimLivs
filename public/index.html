@@ -15,38 +15,32 @@
 
       <header class="header">
         <div class="logo-container">
-          <a href="index.html" class="logo">
+            <a href="index.html" class="logo">
             <img src="./Bilder/HAKIM LIVS.png" alt="Hakim Livs logotyp" class="logo" width="300"/></a>
         </div>
         <div class="search-container">
-          <div class="search-img">
-            <img src="./Bilder/search_opsz40.svg" alt="seach icon" />
-          </div>
-            <input type="text" placeholder="Sök..." class="search-input"/>
-          </div>
+          <input type="text" placeholder="Sök..." class="search-input"/>
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
          
-            <div class="loginUser">
-              <a href="./login.html" class="login">
-                <img src="./Bilder/person.svg" alt="User icon" />
-                <span>Logga in</span>
-              </a>
-            </div>
-            <button class="btn shopping-cart">
+        <div class="loginUser">
+            <a href="./login.html" class="login">
+            <img src="./Bilder/person.svg" alt="User icon" />
+            <span>Logga in</span>
+            </a>
+        </div>
+            <button class="button shoppingcart">
               <a href="./products.html" class="cart">
-                <img src="./Bilder/shopping.svg" alt="Shopping cart" />
                 <span id="btn-text">Till kassan</span>
+                <i class="fa-solid fa-cart-shopping shoppingcart"></i>
               </button>
             </a>
           
       </header>
-
-    <!-- MAIN CONTENT -->
     <main class="main-content">
       <h1>Hakim Livs</h1>
         <div id="products"></div>
     </main>
-
-    <!-- FOOTER -->
     <footer class="site-footer">
       <div class="footer-content">
         <p>&copy; 2024 Hakim Livs. All rights reserved.</p>
@@ -58,7 +52,7 @@
       </div>
     </footer>
 
-
-    <!-- <script type="module" src="/scripts/index.js"></script> -->
+    <!-- PAGE-SPECIFIC JAVASCRIPT -->
+    <script type="module" src="/scripts/index.js"></script>
   </body>
 </html>
