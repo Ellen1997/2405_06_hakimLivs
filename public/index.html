@@ -9,39 +9,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/96ad95103a.js" crossorigin="anonymous"></script>
+
   </head>
   <body>
 
       <header class="header">
         <div class="logo-container">
-          <a href="index.html" class="logo">
+            <a href="index.html" class="logo">
             <img src="./Bilder/HAKIM LIVS.png" alt="Hakim Livs logotyp" class="logo" width="300"/></a>
         </div>
         <div class="search-container">
-          <div class="search-img">
-            <img src="./Bilder/search_opsz40.svg" alt="seach icon" />
-          </div>
-            <input type="text" placeholder="Sök..." class="search-input"/>
-          </div>
+          <input type="text" placeholder="Sök..." class="search-input"/>
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
          
-            <div class="loginUser">
-              <a href="./login.html" class="login">
-                <img src="./Bilder/person.svg" alt="User icon" />
-                <span>Logga in</span>
-              </a>
-            </div>
-            <button class="btn shopping-cart">
+        <div class="loginUser">
+            <a href="./login.html" class="login">
+            <img src="./Bilder/person.svg" alt="User icon" />
+            <span>Logga in</span>
+            </a>
+        </div>
+            <button class="button shoppingcart">
               <a href="./products.html" class="cart">
-                <img src="./Bilder/shopping.svg" alt="Shopping cart" />
                 <span id="btn-text">Till kassan</span>
+                <i class="fa-solid fa-cart-shopping shoppingcart"></i>
               </button>
             </a>
           
       </header>
-
-    <!-- MAIN CONTENT -->
     <main class="main-content">
-      <h1>Welcome to Hakim Livs</h1>
+      <h1>Hakim Livs</h1>
         <div id="products"></div>
     </main>
 
@@ -71,7 +69,7 @@
       </div>
     </footer>
 
-
-    <!-- <script type="module" src="/scripts/index.js"></script> -->
+    <!-- PAGE-SPECIFIC JAVASCRIPT -->
+    <script type="module" src="/scripts/index.js"></script>
   </body>
 </html>
