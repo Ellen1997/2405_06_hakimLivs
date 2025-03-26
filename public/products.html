@@ -3,11 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <title>Hakim Livs - products</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="/public/scripts/products.js" defer></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="main.js"></script>
+    <div class="product-mainContainer">
+      <div class="product-header">
+        <h2>ALLA PRODUKTER</h2>
+      </div>
+      <div class="product-filterAndSortContainer">
+        <fieldset>
+          <legend>Filter</legend>
+            <select name="Filter" id="filter">
+              <option value="test">test</option>
+              <option value="test">test</option>
+              <option value="test">test</option>
+              <option value="test">test</option>
+            </select>
+      </fieldset>
+      <fieldset>
+        <legend>Sortera</legend>
+        <select name="Sort" id="sort">
+          <option value="test">test</option>
+        </select>
+      </fieldset>
+      </div>
+      <div class="productCardsContainer">
+        <div class="productCard">
+          <p>bild</p>
+          <p>pris</p>
+          <p>productname</p>
+          <button class="button">Köp</button>
+        </div>
+        <div class="productCard">
+          <p>bild</p>
+          <p>pris</p>
+          <p>productname</p>
+          <button class="button">Till kassan storiknnnnnnnon</button>
+        </div>
+        <div class="productCard">
+          <p>bild</p>
+          <p>pris</p>
+          <p>productname</p>
+          <button>Köp</button>
+        </div>
+        <div class="productCard">
+          <p>bild</p>
+          <p>pris</p>
+          <p>productname</p>
+          <button>Köp</button>
+        </div>
+        <div class="productCard">
+          <p>bild</p>
+          <p>pris</p>
+          <p>productname</p>
+          <button>Köp</button>
+        </div>
+        <div class="productCard">
+          <p>bild</p>
+          <p>pris</p>
+          <p>productname</p>
+          <button>Köp</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
