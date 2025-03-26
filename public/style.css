@@ -16,32 +16,51 @@ body {
 }
 
 /* Header */
-.site-header {
-  background: #eaeaea;
-  padding: 1rem;
+.header {
+  width: auto;
+  height: 5%;
+  background: var(--box-color);
+  padding: 1%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
 }
 
-.site-header nav {
+.search-container{
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+input{
+ height: 3rem;
+ border-radius: 25px;
+ border: var(--background-color) 3px solid;
+ width: 600px;
 }
 
-.nav-links {
+.loginUser{
   display: flex;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
+  flex-direction: row;
 }
 
-.nav-links a {
+.loginUser a{
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: black;
+  color: var(--primery-text-color);
+}
+.loginUser img{
+  display: flex;
+}
+
+.btn.btn.shopping-cart{
+background-color: #2426CC;
+border-radius: 10px;
+}
+
+#btn-text{
+  color: var(--box-color);
 }
 
 /* Main Content */
