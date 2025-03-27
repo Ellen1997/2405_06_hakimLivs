@@ -236,8 +236,10 @@ li a{
 }
 
 .productImg{
-  height: 50%;
-  width: 20%;
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
 }
 
 /* Login */
@@ -304,11 +306,17 @@ footer.footer{
 /* Admin page*/
 .admin-page-container{
   display: flex;
+  width: 100%;
 }
-.admin-menu-container{
+.admin-add-new-product-container{
+  flex: 1;
+}
+.admin-menu-container {
   background-color: var(--light-blue);
-  height: 100vh;
-  width: 15%;
+  width: 250px;
+  min-width: 200px;
+  min-height: 100vh;
+  flex-shrink: 0;
 }
 .admin-menulinks-container{
   display: flex;
@@ -336,6 +344,7 @@ footer.footer{
   align-items: center;
   background-color: var(--box-color);
   height: 100px;
+  width: 100%;
 }
 .admin-h2-add-product{
   margin-left: 3%;
@@ -381,10 +390,25 @@ footer.footer{
 }
 .testar-denna{
   background-color: var(--box-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+  padding: 1rem;
   width: 100%;
-  height: auto;
-  display: block;
-  max-width: 300px; /* valfritt: begränsa maxstorlek */
-  border-radius: 12px; /* valfritt: rundade hörn */
-  object-fit: contain; /* håller bilden snygg inuti sin box */
+  max-width: 160px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px #0000001a;
+}
+.product-button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  width: 100%;
+}
+.icon-button{
+  padding: 0.5rem 1rem;
 }

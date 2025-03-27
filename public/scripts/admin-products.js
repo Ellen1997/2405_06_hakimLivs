@@ -23,25 +23,30 @@ let renderPage = async () => {
             productName.innerHTML = product.name;
             productCard.appendChild(productName);
 
+            let buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("product-button-container");
+
             let editButton = document.createElement("button");
             editButton.classList.add("button");
+            editButton.classList.add("icon-button");
             let buttonImgEdit = document.createElement("img");
             buttonImgEdit.src = "./Bilder/edit.png";
             buttonImgEdit.alt = "Redigera";
             buttonImgEdit.width = 20;
             editButton.appendChild(buttonImgEdit);
-            productCard.appendChild(editButton);
+            buttonContainer.appendChild(editButton);
 
             let deleteButton = document.createElement("button");
             deleteButton.classList.add("button");
+            deleteButton.classList.add("icon-button");
             let buttonImgDelete = document.createElement("img");
             buttonImgDelete.src = "./Bilder/delete.png";
             buttonImgDelete.alt = "Redigera";
             buttonImgDelete.width = 20;
             deleteButton.appendChild(buttonImgDelete);
-            productCard.appendChild(deleteButton);
+            buttonContainer.appendChild(deleteButton);
 
-            
+            productCard.appendChild(buttonContainer);
             productCardsContainer.appendChild(productCard);
         });
     
