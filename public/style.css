@@ -178,6 +178,7 @@ li a{
 .productPage-mainContainer{
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .leftMenuContainer{
@@ -191,7 +192,8 @@ li a{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 85%;
+  width: 50%;
+  margin: 1%;
 }
 
 .product-header{
@@ -213,6 +215,7 @@ li a{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -220,11 +223,12 @@ li a{
   background-color: var(--box-color);
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   align-items: center;
-  margin-right: 4%;
   margin-top: 2%;
-  padding: 2%
+  padding: 2%;
+  max-width: 24%;
+  min-height: 4%;
+  box-shadow: 0px 4px 10px #0000001a;
 }
 
 .price{
