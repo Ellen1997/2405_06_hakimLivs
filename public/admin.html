@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin</title>
+</head>
+<body>
+    <div class="admin-page-container">
+        <div class="admin-menu-container">
+            <p class="admin-menu-username">${user}</p>
+            <hr class="admin-hr">
+            <div class="admin-menulinks-container">
+                <div class="admin-a-link-img-div">
+                    <img src="./Bilder/home.png" alt="" width="20px">
+                    <a href="index.html" class="admin-menu-a-link">Hem</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="./Bilder/orders.png" alt="" width="20px">
+                    <a href="index.html" class="admin-menu-a-link">Beställningar</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="./Bilder/products.png" alt="" width="20px">
+                    <a href="products.html" class="admin-menu-a-link">Produkter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="add-new-product-container">
+            <div class="admin-title-container">
+                <h2 class="admin-h2-add-product">Addera ny produkt</h2>
+                <div class="admin-title-buttons-container">
+                    <button class="cancel-button">Avbryt</button>
+                    <button class="button">Spara</button>
+                </div>
+            </div>
+            <div class="admin-product-inputfield-container">
+                <img src="./Bilder/img 1.png" alt="">
+                <div class="admin-product-inputs">
+                    <label for="product-name" class="admin-input-label">Produktnamn</label>
+                    <input type="text" name="product-name" id="product-name">
+                    <label for="product-description" class="admin-input-label">Beskrivning</label>
+                    <input type="text" name="product-description" id="product-description">
+                    <label for="admin-dropdown-category" class="admin-input-label">Kategori</label>
+                    <select name="category" id="admin-dropdown-category">
+                        <option value="" disabled selected>Välj kategori</option>
+                        <option value="pantry">Skafferi</option>
+                        <option value="drink">Dryck</option>
+                        <option value="bread">Bröd, kex & kakor</option>
+                        <option value="wellness">Träning & hälsa</option>
+                        <option value="pets">Husdjur</option>
+                        <option value="eco">Eko</option>
+                    </select>
+                    <div class="price-stock-container">
+                        <div class="price-container">
+                            <label for="product-price" class="admin-input-label">Pris (i kr)</label>
+                            <input type="number" name="product-price" id="product-price">
+                        </div>
+                        <div class="stock-container">
+                            <label for="product-stock" class="admin-input-label">Lager saldo</label>
+                            <input type="number" name="product-stock" id="product-stock">
+                        </div>
+                    </div>
+                    <label for="product-image" class="admin-input-label">Produktbild</label>
+                    <input type="file" id="product-image" accept="image/*" class="admin-img-input">
+
+                </div>
+            </div>
+            <div class="admin-save-button-container">
+                <button class="button">Spara</button>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
