@@ -335,8 +335,7 @@ footer.footer{
   justify-content: space-between;
   align-items: center;
   background-color: var(--box-color);
-  width: 85vw;
-  height: 15%;
+  height: 100px;
 }
 .admin-h2-add-product{
   margin-left: 3%;
@@ -375,4 +374,17 @@ footer.footer{
   display: flex;
   justify-content: flex-end;
   margin-right: 10%;
+}
+.admin-all-products-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.testar-denna{
+  background-color: var(--box-color);
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 300px; /* valfritt: begränsa maxstorlek */
+  border-radius: 12px; /* valfritt: rundade hörn */
+  object-fit: contain; /* håller bilden snygg inuti sin box */
 }
