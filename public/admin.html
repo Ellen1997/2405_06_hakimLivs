@@ -7,35 +7,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./scripts/admin.js" defer></script>
     <title>Admin</title>
 </head>
 <body>
     <div class="admin-page-container">
         <div class="admin-menu-container">
-            <p class="admin-menu-username">${user}</p>
+            <p class="admin-menu-username">Välkommen ${user}</p>
             <hr class="admin-hr">
             <div class="admin-menulinks-container">
                 <div class="admin-a-link-img-div">
                     <img src="./Bilder/home.png" alt="" width="20px">
-                    <a href="index.html" class="admin-menu-a-link">Hem</a>
-                </div>
-                <div class="admin-a-link-img-div">
-                    <img src="./Bilder/orders.png" alt="" width="20px">
-                    <a href="index.html" class="admin-menu-a-link">Beställningar</a>
+                    <a href="admin.html" class="admin-menu-a-link">Hem</a>
                 </div>
                 <div class="admin-a-link-img-div">
                     <img src="./Bilder/products.png" alt="" width="20px">
-                    <a href="products.html" class="admin-menu-a-link">Produkter</a>
+                    <a href="admin-products.html" class="admin-menu-a-link">Produktlista</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="./Bilder/orders.png" alt="" width="20px">
+                    <a href="admin-orders.html" class="admin-menu-a-link">Beställningar</a>
                 </div>
             </div>
 
         </div>
-        <div class="add-new-product-container">
+        <div class="admin-add-new-product-container">
             <div class="admin-title-container">
                 <h2 class="admin-h2-add-product">Addera ny produkt</h2>
                 <div class="admin-title-buttons-container">
                     <button class="cancel-button">Avbryt</button>
-                    <button class="button">Spara</button>
+                    <!-- <button class="button" id="admin-save-button">Spara</button> -->
                 </div>
             </div>
             <div class="admin-product-inputfield-container">
@@ -71,7 +73,7 @@
                 </div>
             </div>
             <div class="admin-save-button-container">
-                <button class="button">Spara</button>
+                <button class="button" id="admin-save-button">Spara</button>
             </div>
         </div>
 

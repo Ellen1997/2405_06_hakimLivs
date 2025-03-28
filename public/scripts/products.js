@@ -27,8 +27,13 @@ let renderPage = async () => {
             buyButton.classList.add("button");
             buyButton.innerHTML = "Köp";
             productCard.appendChild(buyButton);
-            
+        
             productCardsContainer.appendChild(productCard);
+
+            productCard.addEventListener("click", () => {
+                window.location.href = "product.html";
+                window.sessionStorage.setItem("id",product._id);
+            });
         });
     
     } catch (error){
