@@ -122,6 +122,14 @@ input{
   color: var(--button-blue);
 }
 
+#userBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer; /* Behåll gärna pekaren om du vill signalera klickbarhet */
+}
+
 .loginUser a{
   display: flex;
   flex-direction: column;
@@ -155,6 +163,87 @@ input{
 
 #btn-text{
   color: var(--box-color);
+}
+
+/* Modal */
+
+.modal{
+  position: fixed;
+  top: 0;
+  overflow: auto; 
+}
+
+.modalContainer{
+  background: var(--box-color);
+  border: var(--frame-grey) 1px solid;
+  margin: 9rem auto;
+  width: auto;
+  border-radius: 10px;
+  position: relative;
+  padding: 3rem;
+}
+
+.close{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.loginForm{
+  display: flex;
+  flex-direction: column; 
+  width: 400px; 
+}
+
+.loginForm label{
+  font-weight: 300;
+  margin: 0.5rem;
+}
+
+.loginForm input{
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.loginBtn{
+  background-color: var(--button-blue);
+  color: var(--primary-button-text-color);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+.modalLinks{
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+}
+
+.forgotPassword, 
+.newAccound{
+  text-decoration: none;
+  color: var(--primary-text-color);
+  cursor: pointer;
+  margin: 0.5rem;
+}
+.newCustomer{
+  background-color: transparent;
+  border: 2px solid #2e53f6;
+  color: #2e53f6;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.forgotPassword:hover, 
+.newAccound:hover, 
+.newCustomer:hover, 
+.loginBtn:hover{
+  text-decoration: underline;
 }
 
 /* Sidebar */
