@@ -479,6 +479,7 @@ footer.footer{
 .products-list-container{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .testar-denna{
   background-color: var(--box-color);
@@ -503,4 +504,9 @@ footer.footer{
 }
 .icon-button{
   padding: 0.5rem 1rem;
+}
+.admin-sort-filter-div{
+  display: flex;
+  justify-content: space-between;
+  margin: 2%;
 }
