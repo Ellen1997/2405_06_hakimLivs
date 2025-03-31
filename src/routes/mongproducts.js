@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
 });
 
 
-//PUT
+// //PUT
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params
@@ -98,26 +98,18 @@ router.put('/:id', async (req, res) => {
 })
 
 
-//delete
+//DELETE
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-
         const result = await mongoproducts.deleteOne({_id: id})
-
-
-
 
         if (result.deletedCount === 0) {
             return res.status(404).json({error: 'Produkten hittas inte!'})
         }
 
-
         res.status(200).json({ message: 'Produkten borttagen' });
-
-
-
 
     }catch (error) {
         res.status(500).send({ message: "Något gick fel", error: error.message });

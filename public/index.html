@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js" integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/public/scripts/products.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <script src="./scripts/index.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -22,17 +23,41 @@
         <input type="text" placeholder="Sök..." class="search-input"/>
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
-
+      
       <div class="loginUser">
-          <a href="./login.html" class="login">
-          <img src="./Bilder/person.svg" alt="User icon" />
-          <span id="login-text">Logga in</span>
+        <button id="userBtn">
+          <a href="#" id="openModalBtn" class="login">
+            <img src="./Bilder/person.svg" alt="User icon" />
+            <span id="login-text">Logga in</span>
           </a>
+        </button>
       </div>
-          <button class="button shoppingcart">
-            <a href="./products.html" class="cart">
-              <span id="btn-text">Till kassan</span>
-              <i class="fa-solid fa-cart-shopping shoppingcart"></i>
+      
+      <div id="loginModal" class="modal">
+        <div class="modalContainer">
+          <span id="closeModal" class="close">&times;</span>
+          <h2>VÄLKOMMEN</h2>
+          <form class="loginForm">
+            <label for="email"></label>
+            <input type="email" id="email" placeholder="E-postadress" required>
+            
+            <label for="password"></label>
+            <input type="password" id="password" placeholder="Lösenord" autocomplete="current-password" required>
+            
+            <button type="submit" class="loginBtn">Logga in</button>
+          </form>
+          
+          <div class="modalLinks">
+            <a href="#" class="forgotPassword">Glömt Lösenord?</a>
+            <a href="#" class="newAccound">Ny kund</a>
+            <button class="newCustomer">Skapa Konto</button>
+          </div>
+        </div>
+      </div>
+      <button class="button shoppingcart">
+        <a href="./products.html" class="cart">
+          <span id="btn-text">Till kassan</span>
+          <i class="fa-solid fa-cart-shopping shoppingcart"></i>
             </button>
           </a>
     </header>
