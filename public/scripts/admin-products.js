@@ -42,6 +42,11 @@ let renderPage = async () => {
             buttonImgDelete.alt = "Redigera";
             buttonImgDelete.width = 20;
 
+            deleteButton.addEventListener("click", async () => {
+                await axios.delete(`https://be-webshop-2025-fe-two.vercel.app/api/products/${product._id}`);
+                productCard.remove();
+            })
+
             deleteButton.appendChild(buttonImgDelete);
             buttonContainer.appendChild(deleteButton);
             productCard.appendChild(buttonContainer);
@@ -54,3 +59,5 @@ let renderPage = async () => {
     }
 }
 renderPage();
+
+
