@@ -1,0 +1,1 @@
+let cartProductCard = document.querySelector(".cartProductCard");

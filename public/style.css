@@ -60,11 +60,16 @@ fieldset{
   color: #5A5A5A;
   font-weight:500;
 }
-h2 {
+h2{
   color: var(--title-color);
   font-weight:900;
   font-style: italic;
 }
+h3 {
+  color: var(--title-color);
+  font-weight:900;
+}
+
 input{
   border-radius: 5px;
   border: 1px solid var(--frame-grey);
@@ -316,6 +321,8 @@ li a{
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .product-filterAndSortContainer{
@@ -337,6 +344,29 @@ li a{
 .singleProductCardContainer{
   background-color: var(--box-color);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.cart-mainContainer{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+  justify-content: space-between;
+}
+.cartProductCardContainer{
+  background-color: var(--box-color);
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.summaryContainer{
+  background-color: var(--box-color);
+  width: 30%;
   display: flex;
   flex-direction: column;
   padding: 2%;
@@ -452,6 +482,11 @@ li a{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.priceTable{
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Login */
