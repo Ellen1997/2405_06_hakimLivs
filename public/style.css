@@ -364,6 +364,21 @@ li a{
   padding: 2%;
 }
 
+.cartProductCard{
+  display: flex;
+  flex-direction: column;
+}
+
+.cartProductAndButton{
+  display: flex;
+  flex-direction: row;
+}
+
+.cartButtonDiv{
+  display: flex;
+  align-self: flex-end;
+}
+
 .summaryContainer{
   background-color: var(--box-color);
   width: 30%;
