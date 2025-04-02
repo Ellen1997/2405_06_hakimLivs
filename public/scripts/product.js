@@ -37,6 +37,45 @@ let renderPage = async () => {
         buyButton.classList.add("button");
         buyButton.innerHTML = "Köp";
         productNamePriceAndButtonContainer.append(buyButton);
+        
+        let productQuantity = 1;
+        let cartQuantity = 0;
+
+        buyButton.addEventListener("click", () => {
+            buyButton.remove();
+            addToCart(cartQuantity);
+            let counterContainer = document.createElement("div");
+            counterContainer.classList.add("counterContainer");
+            productNamePriceAndButtonContainer.appendChild(counterContainer);
+
+            let inputQuantity = document.createElement("input");
+            inputQuantity.type = "numeric";
+            inputQuantity.value = productQuantity;
+            inputQuantity.classList.add("inputQuantity");
+
+            let plusButton = document.createElement("button");
+            plusButton.innerHTML = "+";
+            plusButton.classList.add("plusButton");
+            plusButton.addEventListener("click", () => {
+                productQuantity ++;
+                cartQuantity++;
+                addToCart(cartQuantity);
+                inputQuantity.value = productQuantity;
+            })
+
+            minusButton = document.createElement("button");
+            minusButton.innerHTML = "-";
+            minusButton.classList.add("minusButton");
+            minusButton.addEventListener("click", () => {
+                if (productQuantity > 1) {
+                    productQuantity --;
+                    cartQuantity --;
+                    addToCart(cartQuantity);
+                    inputQuantity.value = productQuantity;
+                }
+            })
+            counterContainer.append(minusButton,inputQuantity,plusButton);
+        });
 
         let line = document.createElement("hr");
         line.style.width = "100%";
@@ -60,6 +99,18 @@ let renderPage = async () => {
     } catch (error){
         console.log("Error fetching data:",error);
     }
+}
+let addToCart = (cartQuantity) => {
+    let shoppingBtn = document.querySelector(".shoppingcart");
+    cartQuantity++;
+    
+    let redBox = shoppingBtn.querySelector(".redBox");
+    if(!redBox){
+        redBox = document.createElement("div");
+        redBox.classList.add("redBox");
+        shoppingBtn.appendChild(redBox);
+    }
+    redBox.innerHTML = cartQuantity;
 }
 
 renderPage();

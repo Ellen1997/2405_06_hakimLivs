@@ -154,6 +154,8 @@ input{
   color: var(--box-color);
   text-decoration: none;
   margin: 0.5rem;
+  position: relative;
+  display: inline-block;
 }
 
 .shoppingcart a:hover{
@@ -356,7 +358,7 @@ li a{
 .productNamePriceAndButtonContainer{
   display: flex;
   flex-direction: column;
-  width: 40%;
+  
 }
 
 .productInfoContainer{
@@ -416,6 +418,7 @@ li a{
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
+  width: fit-content;
 }
 
 .inputQuantity{
@@ -424,7 +427,7 @@ li a{
   text-align: center;
   width: 2.5rem;
   height: 1.5rem;
-  color: red;
+  color:var(--price-color-red);
 }
 
 .plusButton, .minusButton{
@@ -436,6 +439,19 @@ li a{
   height: 2.2rem;
   font-size:x-large;
   cursor: pointer;
+}
+
+.redBox{
+  border-radius: 999px;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: var(--price-color-red);
+  position: absolute;
+  right: -5%;
+  top: -16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Login */
