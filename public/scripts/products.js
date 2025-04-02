@@ -35,9 +35,12 @@ let renderPage = async () => {
             productCard.appendChild(buyButton);
 
             let productQuantity = 1;
+            let cartQuantity = 0;
+
 
             buyButton.addEventListener("click", () => {
                 buyButton.remove();
+                addToCart(cartQuantity);
                 let counterContainer = document.createElement("div");
                 counterContainer.classList.add("counterContainer");
                 productCard.appendChild(counterContainer);
@@ -52,6 +55,8 @@ let renderPage = async () => {
                 plusButton.classList.add("plusButton");
                 plusButton.addEventListener("click", () => {
                     productQuantity ++;
+                    cartQuantity++;
+                    addToCart(cartQuantity);
                     inputQuantity.value = productQuantity;
                 })
 
@@ -61,6 +66,8 @@ let renderPage = async () => {
                 minusButton.addEventListener("click", () => {
                     if (productQuantity > 1) {
                         productQuantity --;
+                        cartQuantity --;
+                        addToCart(cartQuantity);
                         inputQuantity.value = productQuantity;
                     }
                 })
@@ -77,5 +84,19 @@ let renderPage = async () => {
         console.log("Error fetching data:",error);
     }
 }
+
+let addToCart = (cartQuantity) => {
+    let shoppingBtn = document.querySelector(".shoppingcart");
+    cartQuantity++;
+    
+    let redBox = shoppingBtn.querySelector(".redBox");
+    if(!redBox){
+        redBox = document.createElement("div");
+        redBox.classList.add("redBox");
+        shoppingBtn.appendChild(redBox);
+    }
+    redBox.innerHTML = cartQuantity;
+}
+
 
 renderPage();
