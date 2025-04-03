@@ -28,7 +28,7 @@
         <button id="userBtn">
           <a href="#" id="openModalBtn" class="login">
             <img src="./Bilder/person.svg" alt="User icon" />
-            <span id="login-text">Logga in</span>
+            <span id="loginText">Logga in</span>
           </a>
         </button>
       </div>
@@ -38,19 +38,14 @@
           <span id="closeModal" class="close">&times;</span>
           <h2>VÄLKOMMEN</h2>
           <form class="loginForm">
-            <label for="email"></label>
-            <input type="email" id="email" placeholder="E-postadress" required>
-            
-            <label for="password"></label>
-            <input type="password" id="password" placeholder="Lösenord" autocomplete="current-password" required>
-            
+            <input type="email" name="username-input-login" id="username-input-login" class="input username-input-login" autocomplete="username" placeholder="E-postadress" required>
+            <input type="password" name="password-input-login" id="password-input-login" class="input password-input-login" autocomplete="current-password" placeholder="Lösenord" required>
             <button type="submit" class="loginBtn">Logga in</button>
           </form>
           
           <div class="modalLinks">
             <a href="#" class="forgotPassword">Glömt Lösenord?</a>
-            <a href="#" class="newAccound">Ny kund</a>
-            <button class="newCustomer">Skapa Konto</button>
+            <button class="btn-create-account btn" id="btn-create-account">Skapa Konto</button>
           </div>
         </div>
       </div>
