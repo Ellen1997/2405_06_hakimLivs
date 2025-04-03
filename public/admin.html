@@ -12,14 +12,58 @@
     <title>Admin</title>
 </head>
 <body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+            <img src="./Bilder/HAKIM LIVS.png" alt="Hakim Livs logotyp" class="logo" width="300"/></a>
+        </div>
+        <div class="search-container">
+          <input type="text" placeholder="Sök..." class="search-input"/>
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+        
+        <div class="loginUser">
+          <button id="userBtn">
+            <a href="#" id="openModalBtn" class="login">
+              <img src="./Bilder/person.svg" alt="User icon" />
+              <span id="loginText">Logga in</span>
+            </a>
+          </button>
+        </div>
+        
+        <div id="loginModal" class="modal">
+          <div class="modalContainer">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>VÄLKOMMEN</h2>
+            <form class="loginForm">
+              <input type="email" name="username-input-login" id="username-input-login" class="input username-input-login" autocomplete="username" placeholder="E-postadress" required>
+              <input type="password" name="password-input-login" id="password-input-login" class="input password-input-login" autocomplete="current-password" placeholder="Lösenord" required>
+              <button type="submit" class="loginBtn">Logga in</button>
+            </form>
+
+            <div class="modalLinks">
+              <a href="#" class="forgotPassword">Glömt Lösenord?</a>
+              <button class="btn-create-account btn" id="btn-create-account">Skapa Konto</button>
+            </div>
+          </div>
+        </div>
+        <button class="button shoppingcart">
+          <a href="./products.html" class="cart">
+            <span id="btn-text">Till kassan</span>
+            <i class="fa-solid fa-cart-shopping shoppingcart"></i>
+            </a>
+        </button>
+    </header>
     <div class="admin-page-container">
         <div class="admin-menu-container">
-            <p class="admin-menu-username">Välkommen ${user}</p>
-            <hr class="admin-hr">
             <div class="admin-menulinks-container">
                 <div class="admin-a-link-img-div">
                     <img src="./Bilder/home.png" alt="" width="20px">
-                    <a href="admin.html" class="admin-menu-a-link">Hem</a>
+                    <a href="index.html" class="admin-menu-a-link">Hem (Hakim Livs)</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="./Bilder/add.png" alt="" width="20px">
+                    <a href="admin.html" class="admin-menu-a-link">Hantera produkter och kategorier</a>
                 </div>
                 <div class="admin-a-link-img-div">
                     <img src="./Bilder/products.png" alt="" width="20px">
@@ -30,42 +74,53 @@
                     <a href="admin-orders.html" class="admin-menu-a-link">Beställningar</a>
                 </div>
             </div>
-
         </div>
-        <div class="admin-add-new-product-container">
-            <div class="admin-title-container">
-                <h2 class="admin-h2-add-product">Addera ny produkt</h2>
-                <div class="admin-title-buttons-container">
-                    <button class="cancel-button">Avbryt</button>
+        <div class="admin-add-new-container">
+            <div class="admin-add-new-product-container">
+                <div class="admin-title-container">
+                    <h2 class="admin-h2-add">Addera ny produkt</h2>
+                </div>
+                <div class="admin-product-inputfield-container">
+                    <img src="./Bilder/img 1.png" alt="">
+                    <div class="admin-product-inputs">
+                        <label for="admin-product-name" class="admin-input-label">Produktnamn</label>
+                        <input type="text" name="product-name" id="admin-product-name">
+                        <label for="admin-product-description" class="admin-input-label">Beskrivning</label>
+                        <input type="text" name="product-description" id="admin-product-description">
+                        <label for="admin-dropdown-category" class="admin-input-label">Kategori</label>
+                        <select name="category" id="admin-dropdown-category"></select>
+                        <div class="price-stock-container">
+                            <div class="price-container">
+                                <label for="admin-product-price" class="admin-input-label">Pris (i kr)</label>
+                                <input type="number" name="product-price" id="admin-product-price">
+                            </div>
+                            <div class="stock-container">
+                                <label for="admin-product-stock" class="admin-input-label">Lagersaldo</label>
+                                <input type="number" name="product-stock" id="admin-product-stock">
+                            </div>
+                        </div>
+                        <label for="admin-product-image" class="admin-input-label">Produktbild (URL)</label>
+                        <input type="text" id="admin-product-image" class="admin-img-input">
+                    </div>
+                    <div class="admin-save-button-container">
+                        <button class="button" id="admin-save-button">Spara</button>
+                    </div>
                 </div>
             </div>
-            <div class="admin-product-inputfield-container">
-                <img src="./Bilder/img 1.png" alt="">
-                <div class="admin-product-inputs">
-                    <label for="product-name" class="admin-input-label">Produktnamn</label>
-                    <input type="text" name="product-name" id="admin-product-name">
-                    <label for="product-description" class="admin-input-label">Beskrivning</label>
-                    <input type="text" name="product-description" id="admin-product-description">
-                    <label for="admin-dropdown-category" class="admin-input-label">Kategori</label>
-                    <select name="category" id="admin-dropdown-category"></select>
-                    <div class="price-stock-container">
-                        <div class="price-container">
-                            <label for="product-price" class="admin-input-label">Pris (i kr)</label>
-                            <input type="number" name="product-price" id="admin-product-price">
-                        </div>
-                        <div class="stock-container">
-                            <label for="product-stock" class="admin-input-label">Lagersaldo</label>
-                            <input type="number" name="product-stock" id="admin-product-stock">
+            <div class="admin-add-new-category-container">
+                <form action="" id="admin-form-add-category">
+                    <h2 class="admin-h2-add">Addera ny kategori</h2>
+                    <div class="admin-add-category-input-container">
+                        <label for="admin-input-add-category" class="admin-label-add-category">Skapa ny kategori</label>
+                        <input type="text" placeholder="" class="admin-input-add-category" id="admin-input-add-category">
+                        <div class="admin-save-button-container">
+                            <button class="button" id="admin-save-category-button">Spara</button>
                         </div>
                     </div>
-                    <label for="product-image" class="admin-input-label">Produktbild (URL)</label>
-                    <input type="text" id="admin-product-image" class="admin-img-input">
-                </div>
-                <div class="admin-save-button-container">
-                    <button class="button" id="admin-save-button">Spara</button>
-                </div>
+                </form>
             </div>
         </div>
-    </div>   
+    </div>
+    
 </body>
 </html>

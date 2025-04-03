@@ -577,6 +577,7 @@ footer.footer{
 .admin-menulinks-container{
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .admin-menu-username{
   text-align: center;
@@ -586,7 +587,7 @@ footer.footer{
 }
 .admin-a-link-img-div{
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin: 4%;
 }
 .admin-menu-a-link{
@@ -595,25 +596,23 @@ footer.footer{
   color: black;
 }
 .admin-title-container{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--box-color);
-  height: 100px;
-  width: 100%;
+margin: 4% 0;
 }
-.admin-h2-add-product{
+.admin-h2-add{
   margin-left: 3%;
 }
-.admin-title-buttons-container{
-  margin-right: 10%;
-}
-.admin-product-inputfield-container{
+.admin-product-inputfield-container, .admin-add-category-input-container{
   display: flex;
+  justify-content: space-between;
   background-color: var(--box-color);
   border-radius: 5px;
   margin: 2%;
   padding: 2%;
+  width: 160%;
+}
+.admin-add-category-input-container{
+  align-items: center;
+  justify-content: space-between;
 }
 .admin-product-inputs{
   display: flex;
@@ -698,4 +697,7 @@ footer.footer{
   cursor: pointer;
   border-radius: 5px;
   font-size: 1rem;
+}
+.admin-input-add-category{
+  width: 16%;
 }
