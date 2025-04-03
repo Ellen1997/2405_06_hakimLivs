@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hakim Livs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Hakim Livs - varukorg</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/96ad95103a.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js" integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/public/scripts/products.js" defer></script>
+    <script src="/public/scripts/shopping-cart.js" defer></script>
     <link rel="stylesheet" href="style.css">
-    <script src="./scripts/index.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -23,59 +25,22 @@
         <input type="text" placeholder="Sök..." class="search-input"/>
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
-      
+
       <div class="loginUser">
-        <button id="userBtn">
-          <a href="#" id="openModalBtn" class="login">
-            <img src="./Bilder/person.svg" alt="User icon" />
-            <span id="loginText">Logga in</span>
+          <a href="./login.html" class="login">
+          <img src="./Bilder/person.svg" alt="User icon" />
+          <span>Logga in</span>
           </a>
-        </button>
       </div>
-      
-      <div id="loginModal" class="modal">
-        <div class="modalContainer">
-          <span id="closeModal" class="close">&times;</span>
-          <h2>VÄLKOMMEN</h2>
-          <form class="loginForm">
-            <input type="email" name="username-input-login" id="username-input-login" class="input username-input-login" autocomplete="username" placeholder="E-postadress" required>
-            <input type="password" name="password-input-login" id="password-input-login" class="input password-input-login" autocomplete="current-password" placeholder="Lösenord" required>
-            <button type="submit" class="loginBtn">Logga in</button>
-          </form>
-          
-          <div class="modalLinks">
-            <a href="#" class="forgotPassword">Glömt Lösenord?</a>
-            <button class="btn-create-account btn" id="btn-create-account">Skapa Konto</button>
-          </div>
-        </div>
-      </div>
-      <div class="modal" id="accountModal">
-        <div class="modalContainer" id="accountModalContainer">
-          <span id="closeAccountModal" class="close">&times;</span>
-          <h2>HÄRLIGT ATT DU ÄR TILLBAKA</h2>
-          <div id="modalOrder">
-            <i class="fa-solid fa-box"></i>
-            <a href="#" class="inlogBox" id="yourOrder">Dina ordrar</a>
-          </div>
-          <hr>
-          <div id="modalProduct">
-            <i class="fa-solid fa-heart"></i>
-            <a href="#" class="inlogBox" id="YourProduct">Dina produkter</a>
-          </div>
-          <hr>
-          <a href="#" class="inlogBox" id="changePassword">Byt Lösenord</a>
-          <button class="inlogBox" id="logoutBtn">Logga ut</button>
-        </div>
-      </div>
-      
-      <button class="button shoppingcart">
-        <a href="./shopping-cart.html" class="cart">
-          <span id="btn-text">Till kassan</span>
-          <i class="fa-solid fa-cart-shopping shoppingcart"></i>
+          <button class="button shoppingcart">
+            <a href="./shopping-cart.html" class="cart">
+              <span id="btn-text">Till kassan</span>
+              <i class="fa-solid fa-cart-shopping shoppingcart"></i>
             </button>
           </a>
+
     </header>
-    
+
     <div class="productPage-mainContainer">
         <aside class="sidebar">
           <div class="meny">
@@ -91,36 +56,44 @@
             <ul>
               <li><i class="fa-solid fa-boxes-stacked"></i> Skafferi</li>
               <li><i class="fa-solid fa-martini-glass"></i> Drycker</li>
-              <li><i class="fa-solid fa-bread-slice"></i> Bröd & kakor</li>
+              <li><i class="fa-solid fa-bread-slice"></i> Bröd, kex & kakor</li>
               <li><i class="fa-solid fa-dumbbell"></i> Träning & hälsa</li>
               <li><i class="fa-solid fa-paw"></i> Husdjur</li>
               <li><i class="fa-solid fa-leaf"></i> Eko</li>
             </ul>
           </div>
-        </aside> 
 
-          <div class="product-mainContainer">
-            <div class="product-header">
-              <h2>ALLA PRODUKTER</h2>
+        </aside> 
+          <div class="cart-mainContainer">
+
+
+            <div class="cartProductCardContainer">
+                <div class="product-header">
+                    <h2>PRODUKTER</h2>
+                    <a href="./products.html">Fortsätt handla</a>
+                </div>
+                <p>Har du ett konto?<a href="./login.html">Logga in</a></p>
+                <hr style="width:100%;margin-left:0">
+                <div class="cartContainer">
+                    <!-- <div class="cartProductAndButton"></div> -->
+                    <!-- <i class="fa-solid fa-trash" style="color: #011e62;"></i> -->
+                    <div class="cartButtonDiv">
+                        <!-- <button class="button">Gå till kassan</button> -->
+                    </div>
+                </div>
             </div>
-            <div class="product-filterAndSortContainer">
-              <fieldset>
-                <legend>Filter</legend>
-                  <select name="Filter" id="filter">
-                    <option value="test">test</option>
-                    <option value="test">test</option>
-                    <option value="test">test</option>
-                    <option value="test">test</option>
-                  </select>
-            </fieldset>
-            <fieldset>
-              <legend>Sortera</legend>
-              <select name="Sort" id="sort">
-                <option value="test">test</option>
-              </select>
-            </fieldset>
+            <div class="summaryContainer">
+                <h3>Sammanfattning</h3>
+                <div class="priceTable">
+                    <p><b>Antal varor</b></p>
+                    <p id="amountProducts"></p>
+                </div>
+                <hr style="width:100%;margin-left:0">
+                <div class="priceTable">
+                    <p><b>Totalsumma</b></p>
+                    <p id="totalSumProducts"></p>
+                </div>
             </div>
-            <div class="productCardsContainer"></div>
           </div>
       </div>
 
