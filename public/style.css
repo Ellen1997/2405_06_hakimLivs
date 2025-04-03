@@ -364,7 +364,7 @@ li a{
   padding: 2%;
 }
 
-.cartProductCard{
+.cartContainer{
   display: flex;
   flex-direction: column;
 }
@@ -372,6 +372,7 @@ li a{
 .cartProductAndButton{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .cartButtonDiv{
@@ -452,6 +453,13 @@ li a{
   max-height: 285px;
 }
 
+.cartProductImg{
+  width: auto;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
 .productInfoTitle-h3{
   color: var(--title-color);
 }
@@ -502,6 +510,16 @@ li a{
 .priceTable{
   display: flex;
   justify-content: space-between;
+}
+
+.namePriceAmountDiv{
+  display: flex;
+  flex-direction: column;
+}
+
+.imgAndProductInfo{
+  display: flex;
+  flex-direction: row;
 }
 
 /* Login */
