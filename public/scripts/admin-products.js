@@ -26,6 +26,7 @@ let renderPage = async () => {
             productCard.appendChild(price);
             
             let productName = document.createElement("p");
+            productName.classList.add("product-name");
             productName.innerHTML = product.name;
             productCard.appendChild(productName);
 
@@ -134,8 +135,8 @@ editModal.querySelector("#save-product").addEventListener("click", async () => {
     updatedCard.dataset.stock = updatedProduct.stock;
     updatedCard.dataset.image = updatedProduct.img;
 
-    updatedCard.querySelector("p:nth-child(2)").innerText = `${updatedProduct.price} :-`;
-    updatedCard.querySelector("p:nth-child(3)").innerText = updatedProduct.name;
+    updatedCard.querySelector(".price").innerText = `${updatedProduct.price} :-`;
+    updatedCard.querySelector(".product-name").innerText = updatedProduct.name;
     updatedCard.querySelector("img").src = updatedProduct.img;
 
     editModal.style.display = "none";
