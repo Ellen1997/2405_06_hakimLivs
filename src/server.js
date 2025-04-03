@@ -1,11 +1,14 @@
+require('dotenv').config()
+
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const mongproductsRoute = require("./routes/mongproducts.js");
+const categorysRoute = require("./routes/categoryRoute.js")
+const auth = require("./routes/auth.js")
 const path = require("path");
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,6 +31,8 @@ mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbre
     );
 
 app.use("/api/products", mongproductsRoute);
+app.use("/api/category", categorysRoute);
+app.use("/api/users", auth);
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 
