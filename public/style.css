@@ -632,19 +632,12 @@ footer.footer{
   flex-direction: column;
   gap: 8px;
 }
-.admin-img-input{
-  border: none;
-  padding: 1px;
-}
 .admin-save-button-container{
   display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
+  align-self: flex-end;
+  margin-left: 25%;
+  height: 35px;
 }
-/* .admin-all-products-container{
-  display: flex;
-  flex-wrap: wrap;
-} */
 .products-list-container{
   display: flex;
   flex-wrap: wrap;
@@ -678,4 +671,31 @@ footer.footer{
   display: flex;
   justify-content: space-between;
   margin: 2%;
+}
+.editModal{
+  position: fixed;
+  top: 0;
+  left: 45%;
+}
+.editModalContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--box-color);
+  border: var(--frame-grey) 1px solid;
+  margin: 9rem auto;
+  width: auto;
+  border-radius: 10px;
+  position: relative;
+  padding: 2rem;
+  gap: 5px;
+}
+#save-product {
+  background: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
 }

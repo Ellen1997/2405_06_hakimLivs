@@ -43,40 +43,29 @@
                 <img src="./Bilder/img 1.png" alt="">
                 <div class="admin-product-inputs">
                     <label for="product-name" class="admin-input-label">Produktnamn</label>
-                    <input type="text" name="product-name" id="product-name">
+                    <input type="text" name="product-name" id="admin-product-name">
                     <label for="product-description" class="admin-input-label">Beskrivning</label>
-                    <input type="text" name="product-description" id="product-description">
+                    <input type="text" name="product-description" id="admin-product-description">
                     <label for="admin-dropdown-category" class="admin-input-label">Kategori</label>
-                    <select name="category" id="admin-dropdown-category">
-                        <option value="" disabled selected>Välj kategori</option>
-                        <option value="pantry">Skafferi</option>
-                        <option value="drink">Dryck</option>
-                        <option value="bread">Bröd, kex & kakor</option>
-                        <option value="wellness">Träning & hälsa</option>
-                        <option value="pets">Husdjur</option>
-                        <option value="eco">Eko</option>
-                    </select>
+                    <select name="category" id="admin-dropdown-category"></select>
                     <div class="price-stock-container">
                         <div class="price-container">
                             <label for="product-price" class="admin-input-label">Pris (i kr)</label>
-                            <input type="number" name="product-price" id="product-price">
+                            <input type="number" name="product-price" id="admin-product-price">
                         </div>
                         <div class="stock-container">
                             <label for="product-stock" class="admin-input-label">Lagersaldo</label>
-                            <input type="number" name="product-stock" id="product-stock">
+                            <input type="number" name="product-stock" id="admin-product-stock">
                         </div>
                     </div>
-                    <label for="product-image" class="admin-input-label">Produktbild</label>
-                    <input type="file" id="product-image" accept="image/*" class="admin-img-input">
-
+                    <label for="product-image" class="admin-input-label">Produktbild (URL)</label>
+                    <input type="text" id="admin-product-image" class="admin-img-input">
+                </div>
+                <div class="admin-save-button-container">
+                    <button class="button" id="admin-save-button">Spara</button>
                 </div>
             </div>
-            <div class="admin-save-button-container">
-                <button class="button" id="admin-save-button">Spara</button>
-            </div>
         </div>
-
-    </div>
-    
+    </div>   
 </body>
 </html>
