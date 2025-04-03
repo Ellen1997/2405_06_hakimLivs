@@ -60,11 +60,16 @@ fieldset{
   color: #5A5A5A;
   font-weight:500;
 }
-h2 {
+h2{
   color: var(--title-color);
   font-weight:900;
   font-style: italic;
 }
+h3 {
+  color: var(--title-color);
+  font-weight:900;
+}
+
 input{
   border-radius: 5px;
   border: 1px solid var(--frame-grey);
@@ -130,6 +135,10 @@ input{
   cursor: pointer; /* Behåll gärna pekaren om du vill signalera klickbarhet */
 }
 
+#loginText{
+  text-decoration: none;
+}
+
 .loginUser a{
   display: flex;
   flex-direction: column;
@@ -143,7 +152,7 @@ input{
 }
 
 #login-text{
-  font-size: 0.5rem;
+  font-size: 0.7rem;
 }
 
 .loginUser img:hover{
@@ -162,6 +171,9 @@ input{
   color: var(--primary-button-text-color);           
   text-decoration: underline;
 }
+.cart{
+  text-decoration: none;
+}
 
 #btn-text{
   color: var(--box-color);
@@ -170,11 +182,48 @@ input{
 /* Modal */
 
 .modal{
+  display: none;
   position: fixed;
   top: 0;
   overflow: auto; 
 }
 
+.flexBox{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.inlogBox{
+  display: inline-block;
+  flex-direction: column;
+  margin: 1rem;
+  text-decoration: none;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.inlogBox:hover{
+  text-decoration: underline;
+  color: var(--primary-text-color);
+}
+
+#inlogModal{
+  display: flex;
+  flex-direction: column;
+}
+
+.yourOrder,
+.YourProduct{
+  font-weight: bolder;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc; 
+  margin: 0.5rem 0;
+}
 .modalContainer{
   background: var(--box-color);
   border: var(--frame-grey) 1px solid;
@@ -207,6 +256,7 @@ input{
 .loginForm input{
   padding: 1rem;
   font-size: 1rem;
+  margin-top: 1rem;
 }
 
 .loginBtn{
@@ -232,7 +282,8 @@ input{
   cursor: pointer;
   margin: 0.5rem;
 }
-.newCustomer{
+.btn-create-account, 
+#logoutBtn{
   background-color: transparent;
   border: 2px solid #2e53f6;
   color: #2e53f6;
@@ -242,8 +293,7 @@ input{
   border-radius: 10px;
 }
 .forgotPassword:hover, 
-.newAccound:hover, 
-.newCustomer:hover, 
+.btn-create-account:hover, 
 .loginBtn:hover{
   text-decoration: underline;
 }
@@ -316,6 +366,8 @@ li a{
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .product-filterAndSortContainer{
@@ -337,6 +389,45 @@ li a{
 .singleProductCardContainer{
   background-color: var(--box-color);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.cart-mainContainer{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+  justify-content: space-between;
+}
+.cartProductCardContainer{
+  background-color: var(--box-color);
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.cartContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.cartProductAndButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cartButtonDiv{
+  display: flex;
+  align-self: flex-end;
+}
+
+.summaryContainer{
+  background-color: var(--box-color);
+  width: 30%;
   display: flex;
   flex-direction: column;
   padding: 2%;
@@ -407,6 +498,13 @@ li a{
   max-height: 285px;
 }
 
+.cartProductImg{
+  width: auto;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
 .productInfoTitle-h3{
   color: var(--title-color);
 }
@@ -452,6 +550,21 @@ li a{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.priceTable{
+  display: flex;
+  justify-content: space-between;
+}
+
+.namePriceAmountDiv{
+  display: flex;
+  flex-direction: column;
+}
+
+.imgAndProductInfo{
+  display: flex;
+  flex-direction: row;
 }
 
 /* Login */
@@ -532,6 +645,7 @@ footer.footer{
 .admin-menulinks-container{
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .admin-menu-username{
   text-align: center;
@@ -541,7 +655,7 @@ footer.footer{
 }
 .admin-a-link-img-div{
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin: 4%;
 }
 .admin-menu-a-link{
@@ -550,25 +664,23 @@ footer.footer{
   color: black;
 }
 .admin-title-container{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--box-color);
-  height: 100px;
-  width: 100%;
+margin: 4% 0;
 }
-.admin-h2-add-product{
+.admin-h2-add{
   margin-left: 3%;
 }
-.admin-title-buttons-container{
-  margin-right: 10%;
-}
-.admin-product-inputfield-container{
+.admin-product-inputfield-container, .admin-add-category-input-container{
   display: flex;
+  justify-content: space-between;
   background-color: var(--box-color);
   border-radius: 5px;
   margin: 2%;
   padding: 2%;
+  width: 160%;
+}
+.admin-add-category-input-container{
+  align-items: center;
+  justify-content: space-between;
 }
 .admin-product-inputs{
   display: flex;
@@ -587,19 +699,12 @@ footer.footer{
   flex-direction: column;
   gap: 8px;
 }
-.admin-img-input{
-  border: none;
-  padding: 1px;
-}
 .admin-save-button-container{
   display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
+  align-self: flex-end;
+  margin-left: 25%;
+  height: 35px;
 }
-/* .admin-all-products-container{
-  display: flex;
-  flex-wrap: wrap;
-} */
 .products-list-container{
   display: flex;
   flex-wrap: wrap;
@@ -633,4 +738,34 @@ footer.footer{
   display: flex;
   justify-content: space-between;
   margin: 2%;
+}
+.editModal{
+  position: fixed;
+  top: 0;
+  left: 45%;
+}
+.editModalContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--box-color);
+  border: var(--frame-grey) 1px solid;
+  margin: 9rem auto;
+  width: auto;
+  border-radius: 10px;
+  position: relative;
+  padding: 2rem;
+  gap: 5px;
+}
+#save-product {
+  background: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.admin-input-add-category{
+  width: 16%;
 }
