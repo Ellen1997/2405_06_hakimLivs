@@ -3,6 +3,7 @@ const loginModal = document.querySelector("#loginModal");
 const accountModal = document.querySelector("#accountModal"); 
 const closeLoginModal = document.querySelector("#closeLoginModal");
 const closeAccountModal = document.querySelector("#closeAccountModal");
+const logoutBtn = document.querySelector("#logoutBtn");
 
 
 const userIsLoggedIn = false;
@@ -30,7 +31,14 @@ closeAccountModal.addEventListener("click", (e) => {
 
 
 function loginSuccess() {
-  userIsLoggedIn = true;
+  userIsLoggedIn = false;
   openModalBtn.textContent = "Ditt konto"; 
   loginModal.style.display = "none";
 }
+
+logoutBtn.addEventListener("click", () =>{
+  localStorage.removeItem("currentUser");
+  loginText.textContent = "Logga in";
+  accountModal.style.display = "none";
+  window.location.href = "index.html";
+})

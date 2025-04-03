@@ -130,6 +130,10 @@ input{
   cursor: pointer; /* Behåll gärna pekaren om du vill signalera klickbarhet */
 }
 
+#loginText{
+  text-decoration: none;
+}
+
 .loginUser a{
   display: flex;
   flex-direction: column;
@@ -161,6 +165,9 @@ input{
 .shoppingcart a:hover{
   color: var(--primary-button-text-color);           
   text-decoration: underline;
+}
+.cart{
+  text-decoration: none;
 }
 
 #btn-text{
@@ -244,6 +251,7 @@ hr {
 .loginForm input{
   padding: 1rem;
   font-size: 1rem;
+  margin-top: 1rem;
 }
 
 .loginBtn{
@@ -269,7 +277,8 @@ hr {
   cursor: pointer;
   margin: 0.5rem;
 }
-.newCustomer{
+.btn-create-account, 
+#logoutBtn{
   background-color: transparent;
   border: 2px solid #2e53f6;
   color: #2e53f6;
@@ -279,8 +288,7 @@ hr {
   border-radius: 10px;
 }
 .forgotPassword:hover, 
-.newAccound:hover, 
-.newCustomer:hover, 
+.btn-create-account:hover, 
 .loginBtn:hover{
   text-decoration: underline;
 }
