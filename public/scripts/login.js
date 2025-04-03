@@ -1,23 +1,36 @@
-document.addEventListener("DOMContentLoaded", initLogin);
+const openModalBtn = document.querySelector("#openModalBtn"); 
+const loginModal = document.querySelector("#loginModal"); 
+const accountModal = document.querySelector("#accountModal"); 
+const closeLoginModal = document.querySelector("#closeLoginModal");
+const closeAccountModal = document.querySelector("#closeAccountModal");
 
-function initLogin() {
-  const loginForm = document.getElementById("loginForm");
 
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    handleLogin();
-  });
-}
+const userIsLoggedIn = false;
 
-function handleLogin() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
 
-  // Basic demo login - NOT SECURE
-  if (username === "admin" && password === "admin") {
-    window.location.href = "admin.html";
+openModalBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  
+  if(userIsLoggedIn) {
+    accountModal.style.display = "block";
   } else {
-    alert("Invalid credentials: LOGGING IN ANYWAY");
-    window.location.href = "admin.html";
+    loginModal.style.display = "block";
   }
+});
+
+closeLoginModal.addEventListener("click", (e) => {
+  e.preventDefault();
+  loginModal.style.display = "none";
+});
+
+closeAccountModal.addEventListener("click", (e) => {
+  e.preventDefault();
+  accountModal.style.display = "none";
+});
+
+
+function loginSuccess() {
+  userIsLoggedIn = true;
+  openModalBtn.textContent = "Ditt konto"; 
+  loginModal.style.display = "none";
 }
