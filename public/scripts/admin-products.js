@@ -27,7 +27,7 @@ let renderPage = async () => {
             
             let productName = document.createElement("p");
             productName.classList.add("product-name");
-            productName.innerHTML = product.name;
+            productName.innerText = product.name;
             productCard.appendChild(productName);
 
             let buttonContainer = document.createElement("div");
@@ -43,6 +43,7 @@ let renderPage = async () => {
             buttonContainer.appendChild(editButton);
 
             editButton.addEventListener("click", () => openEditModal(productCard));
+            console.log(productCard);
 
             let deleteButton = document.createElement("button");
             deleteButton.classList.add("button", "icon-button");
