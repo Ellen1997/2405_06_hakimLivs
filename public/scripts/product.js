@@ -2,7 +2,7 @@ let renderPage = async () => {
     const id = sessionStorage.getItem("id");
     let singleProductCardContainer = document.querySelector(".singleProductCardContainer");
 
-    try{
+    try {
         let response = await axios.get(`https://be-webshop-2025-fe-two.vercel.app/api/products/${id}`);
         let product = response.data;
 
@@ -37,44 +37,43 @@ let renderPage = async () => {
         buyButton.classList.add("button");
         buyButton.innerHTML = "Köp";
         productNamePriceAndButtonContainer.append(buyButton);
-        
+
         let productQuantity = 1;
-        let cartQuantity = 0;
 
         buyButton.addEventListener("click", () => {
             buyButton.remove();
-            addToCart(cartQuantity);
+            addToCart(product, 1);
+        
             let counterContainer = document.createElement("div");
             counterContainer.classList.add("counterContainer");
             productNamePriceAndButtonContainer.appendChild(counterContainer);
-
+        
             let inputQuantity = document.createElement("input");
             inputQuantity.type = "numeric";
-            inputQuantity.value = productQuantity;
+            inputQuantity.value = 1;
             inputQuantity.classList.add("inputQuantity");
-
+        
             let plusButton = document.createElement("button");
             plusButton.innerHTML = "+";
             plusButton.classList.add("plusButton");
             plusButton.addEventListener("click", () => {
-                productQuantity ++;
-                cartQuantity++;
-                addToCart(cartQuantity);
-                inputQuantity.value = productQuantity;
-            })
-
-            minusButton = document.createElement("button");
+                let newQuantity = parseInt(inputQuantity.value) + 1;
+                inputQuantity.value = newQuantity;
+                updateCart(product, newQuantity);
+            });
+        
+            let minusButton = document.createElement("button");
             minusButton.innerHTML = "-";
             minusButton.classList.add("minusButton");
             minusButton.addEventListener("click", () => {
-                if (productQuantity > 1) {
-                    productQuantity --;
-                    cartQuantity --;
-                    addToCart(cartQuantity);
-                    inputQuantity.value = productQuantity;
+                let newQuantity = parseInt(inputQuantity.value) - 1;
+                if (newQuantity > 0) {
+                    inputQuantity.value = newQuantity;
+                    updateCart(product, newQuantity);
                 }
-            })
-            counterContainer.append(minusButton,inputQuantity,plusButton);
+            });
+        
+            counterContainer.append(minusButton, inputQuantity, plusButton);
         });
 
         let line = document.createElement("hr");
@@ -90,27 +89,65 @@ let renderPage = async () => {
 
         let productInfo = document.createElement("p");
         productInfo.innerText = product.description;
-        productInfoContainer.append(line,productInfoTitle,productInfo);
+        productInfoContainer.append(line, productInfoTitle, productInfo);
 
-
-        singleProductCardContainer.append(categoryContainer,imgAndProductInfoContainer,productInfoContainer);
+        singleProductCardContainer.append(categoryContainer, imgAndProductInfoContainer, productInfoContainer);
         imgAndProductInfoContainer.append(productNamePriceAndButtonContainer);
 
-    } catch (error){
-        console.log("Error fetching data:",error);
+    } catch (error) {
+        console.log("Error fetching data:", error);
     }
-}
-let addToCart = (cartQuantity) => {
+};
+
+let addToCart = (product, quantity) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existingProduct = cart.find(item => item.product === product.name);
+
+    if (existingProduct) {
+        existingProduct.amount += quantity;
+    } else {
+        cart.push({
+            product: product.name,
+            price: product.price,
+            img: product.img,
+            amount: quantity
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartIcon();
+};
+
+let updateCart = (product, quantity) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existingProduct = cart.find(item => item.product === product.name);
+
+    if (existingProduct) {
+        if (quantity > 0) {
+            existingProduct.amount = quantity;
+        } else {
+            cart = cart.filter(item => item.product !== product.name);
+        }
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartIcon();
+};
+
+let updateCartIcon = () => {
     let shoppingBtn = document.querySelector(".shoppingcart");
-    cartQuantity++;
-    
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let totalItems = cart.reduce((sum, item) => sum + item.amount, 0);
+
     let redBox = shoppingBtn.querySelector(".redBox");
-    if(!redBox){
+    if (!redBox) {
         redBox = document.createElement("div");
         redBox.classList.add("redBox");
         shoppingBtn.appendChild(redBox);
     }
-    redBox.innerHTML = cartQuantity;
-}
+
+    redBox.innerHTML = totalItems;
+};
 
 renderPage();
+updateCartIcon();
