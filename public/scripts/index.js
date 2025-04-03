@@ -1,4 +1,4 @@
-console.log("hello")
+
 const openModalBtn = document.querySelector("#openModalBtn"); 
 const closeModalBtn = document.querySelector("#closeModal"); 
 const loginModal = document.querySelector("#loginModal"); 
