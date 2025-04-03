@@ -573,8 +573,9 @@ footer.footer{
 }
 .admin-save-button-container{
   display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
+  align-self: flex-end;
+  margin-left: 25%;
+  height: 35px;
 }
 .products-list-container{
   display: flex;
