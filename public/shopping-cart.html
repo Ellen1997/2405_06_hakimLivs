@@ -6,13 +6,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <title>Hakim Livs - produkt</title>
+    <title>Hakim Livs - varukorg</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/96ad95103a.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js" integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/public/scripts/product.js" defer></script>
+    <script src="/public/scripts/shopping-cart.js" defer></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -64,10 +64,36 @@
           </div>
 
         </aside> 
-          <div class="product-mainContainer">
+          <div class="cart-mainContainer">
 
 
-            <div class="singleProductCardContainer"></div>
+            <div class="cartProductCardContainer">
+                <div class="product-header">
+                    <h2>PRODUKTER</h2>
+                    <a href="./products.html">Fortsätt handla</a>
+                </div>
+                <p>Har du ett konto?<a href="./login.html">Logga in</a></p>
+                <hr style="width:100%;margin-left:0">
+                <div class="cartContainer">
+                    <!-- <div class="cartProductAndButton"></div> -->
+                    <!-- <i class="fa-solid fa-trash" style="color: #011e62;"></i> -->
+                    <div class="cartButtonDiv">
+                        <!-- <button class="button">Gå till kassan</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="summaryContainer">
+                <h3>Sammanfattning</h3>
+                <div class="priceTable">
+                    <p><b>Antal varor</b></p>
+                    <p id="amountProducts"></p>
+                </div>
+                <hr style="width:100%;margin-left:0">
+                <div class="priceTable">
+                    <p><b>Totalsumma</b></p>
+                    <p id="totalSumProducts"></p>
+                </div>
+            </div>
           </div>
       </div>
 
