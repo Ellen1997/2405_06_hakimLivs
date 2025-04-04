@@ -6,6 +6,17 @@ const router = express.Router();
 const User = require("../models/User.js");
 const { authenticateToken, isAdmin } = require("../middleware/auth.js")
 
+router.get("/", async (req, res) => {
+    try {
+        const userName = req.query.User;
+        const query = userName ? { username: userName} : {};
+
+        const users = await User.find(query);
+        res.status(200).json(users);
+    }catch (error) {
+        res.status(500).send({ message: "Något gick fel, kunde ej hämta användare", error: error.message });
+    }
+});
 
 router.post('/register', async (req, res) => {
   try {
@@ -61,14 +72,34 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const userDelete = await User.findByIdAndDelete(id)
+
+        if (!userDelete) {
+            return res.status(404).json({error: 'Användaren hittas inte!'})
+        }
+
+        res.status(200).json({ message: 'Användaren borttagen', deletedUser: userDelete });
+
+    }catch (error) {
+        res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+    }
+})
+
 router.get('/protected', authenticateToken, (req, res) => {
 res.json({message: "You have access!", user: req.user})
 
 })
 
 router.get('/admin-only', authenticateToken, isAdmin, (req, res) => {
-  res.json({ message: "Welcome, Admin!", user: req.user });
+  res.render('');
+  
 });
+
+
 
 
 module.exports = router;
