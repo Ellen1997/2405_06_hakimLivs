@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET || 'qwerty123',
-      {expiresIn: '1h'}
+      {expiresIn: '96h'}
     );
     
     res.status(201).json({ user, token });
@@ -95,7 +95,7 @@ res.json({message: "You have access!", user: req.user})
 })
 
 router.get('/admin-only', authenticateToken, isAdmin, (req, res) => {
-  res.render('');
+  res.json({message: 'Välkommen Admin!'});
   
 });
 

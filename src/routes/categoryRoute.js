@@ -1,5 +1,6 @@
 const express = require("express");
 const category = require("../models/category.js");
+const { authenticateToken, isAdmin } = require("../middleware/auth.js")
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authenticateToken, isAdmin, async (req, res) => {
     try {
         const {name, description} = req.body;
 
@@ -36,7 +37,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticateToken, isAdmin, async (req, res) => {
     try {
         const { id } = req.params
         const { name, description } = req.body;
@@ -65,7 +66,7 @@ router.put('/:id', async (req, res) => {
     }
 }) 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticateToken, isAdmin, async (req, res) => {
     try {
         const { id } = req.params;
 
