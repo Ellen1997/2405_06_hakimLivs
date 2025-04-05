@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoproducts = require("../models/mongoproducts.js");
+const Category = require("../models/category.js")
 
 
 const router = express.Router();
@@ -11,7 +12,8 @@ const router = express.Router();
         const category = req.query.category;
         const query = category ? { category: category} : {};
 
-        const products = await mongoproducts.find(query);
+        const products = await mongoproducts.find(query).populate("category");
+
         res.status(200).json(products);
     }catch (error) {
         res.status(500).send({ message: "Något gick fel", error: error.message });
@@ -22,7 +24,7 @@ const router = express.Router();
 router.get('/:id', async (req, res) => {
     try {
 
-        const product = await mongoproducts.findById(req.params.id);
+        const product = await mongoproducts.findById(req.params.id).populate("category");
 
         if (!product) {
             return res.status(404).send({message: 'Produkt inte hittad!'})
@@ -37,10 +39,16 @@ router.get('/:id', async (req, res) => {
 //POST
 router.post('/', async (req, res) => {
     try {
-        const {name, price, description, stock, category, img} = req.body;
+        const {name, price, description, stock, categoryName, img} = req.body;
 
-        if (!name || !price || !description || !stock || !category || !img) {
+        if (!name || !price || !description || !stock || !categoryName || !img) {
             return res.status(400).json({ message: 'Fyll i alla fält för att skapa produkt' });
+        }
+
+        const category = await Category.findOne({name: categoryName});
+
+        if (!category) {
+            return res.status(404).json({message: "Kategorin hittades ej"})
         }
 
         const newProduct = new mongoproducts({
@@ -48,7 +56,7 @@ router.post('/', async (req, res) => {
             price,
             description,
             stock,
-            category,
+            category: category._id,
             img
         });
 

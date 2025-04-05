@@ -72,6 +72,43 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.put('/update', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    
+    const user = await User.findById(userId);
+
+    if (req.body.username && req.body.username !== user.username) {
+      const usernameFinnsRedan = await User.findOne({ username: req.body.username });
+      if (usernameFinnsRedan) {
+        return res.status(400).json({ error: "Användarnamnet är upptaget" });
+      }
+      user.username = req.body.username;
+    }
+
+    if (req.body.email && req.body.email !== user.email) {
+      const emailExists = await User.findOne({ email: req.body.email });
+      if (emailExists) {
+        return res.status(400).json({ error: "Ett konto med denna mejladress finns redan" });
+      }
+      user.email = req.body.email;
+    }
+
+    if (req.body.password) {
+      user.password = await bcrypt.hash(req.body.password, 10);
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      message: "User uppdaterades",
+      user: { username: user.username, email: user.email }
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error vid uppdatering", message: error.message });
+  }
+});
+
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -90,7 +127,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.get('/protected', authenticateToken, (req, res) => {
-res.json({message: "You have access!", user: req.user})
+res.json({message: "Välkommen, du har åtkomst!", user: req.user})
 
 })
 
