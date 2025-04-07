@@ -20,11 +20,12 @@ router.get("/", async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const {username, email, password, isAdmin} = req.body;
+    const {username, email, mobileNumber, password, isAdmin} = req.body;
    
     const user = new User({
       username, 
       email,
+      mobileNumber,
       password,
       isAdmin: isAdmin || false
     })
@@ -94,6 +95,9 @@ router.put('/update', authenticateToken, async (req, res) => {
       user.email = req.body.email;
     }
 
+    if (req.body.mobileNumber !== undefined)
+    user.mobileNumber = req.body.mobileNumber 
+
     if (req.body.password) {
       user.password = await bcrypt.hash(req.body.password, 10);
     }
@@ -102,29 +106,43 @@ router.put('/update', authenticateToken, async (req, res) => {
 
     res.status(200).json({
       message: "User uppdaterades",
-      user: { username: user.username, email: user.email }
+      user: { username: user.username, email: user.email, mobileNumber: user.mobileNumber }
     });
   } catch (error) {
     res.status(500).json({ error: "Error vid uppdatering", message: error.message });
   }
 });
 
-router.delete('/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
+router.delete('/delete', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
 
-        const userDelete = await User.findByIdAndDelete(id)
+    const userDelete = await User.findByIdAndDelete(userId);
 
-        if (!userDelete) {
-            return res.status(404).json({error: 'Användaren hittas inte!'})
-        }
+    res.status(200).json({ message: 'Ditt konto har tagits bort', deletedUser: userDelete });
 
-        res.status(200).json({ message: 'Användaren borttagen', deletedUser: userDelete });
+  } catch (error) {
+    res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+  }
+});
 
-    }catch (error) {
-        res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+router.delete('/delete/:id', authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const userDelete = await User.findByIdAndDelete(id);
+
+    if (!userDelete) {
+      return res.status(404).json({ error: 'Användaren hittas inte!' });
     }
-})
+
+    res.status(200).json({ message: 'Användaren borttagen', deletedUser: userDelete });
+
+  } catch (error) {
+    res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+  }
+});
+
 
 router.get('/protected', authenticateToken, (req, res) => {
 res.json({message: "Välkommen, du har åtkomst!", user: req.user})
