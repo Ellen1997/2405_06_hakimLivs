@@ -11,8 +11,29 @@
     }
   ],
   "routes": [
+ 
+    {
+      "src": "/api/products",
+      "dest": "src/server.js"
+    },
     {
       "src": "/api/products/(.*)",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/api/category",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/api/category/(.*)",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/api/users",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/api/users/(.*)",
       "dest": "src/server.js"
     },
     {
