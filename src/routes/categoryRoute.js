@@ -1,5 +1,7 @@
 const express = require("express");
 const category = require("../models/category.js");
+const mongoproducts = require('../models/mongoproducts');
+const { authenticateToken, isAdmin } = require("../middleware/auth.js")
 
 const router = express.Router();
 
@@ -20,7 +22,7 @@ router.post('/', async (req, res) => {
         const {name, description} = req.body;
 
         if (!name || !description) {
-            return res.status(400).json({ message: 'Fyll i alla fält för att skapa produkt' });
+            return res.status(400).json({ message: 'Fyll i alla fält för att skapa kategori' });
         }
 
         const newCategory = new category({
@@ -32,7 +34,7 @@ router.post('/', async (req, res) => {
         res.status(201).send({ message: "Kategori skapad", category: newCategory });
 
     } catch (error) {
-        res.status(500).send({ message: "Något gick fel, ketegori ej inlagd", error: error.message});
+        res.status(500).send({ message: "Något gick fel, kategori ej inlagd", error: error.message});
     }
 })
 

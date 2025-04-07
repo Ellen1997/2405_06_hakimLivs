@@ -1,0 +1,11 @@
+junie, reg anv token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWY2ZTcyOWEzYzMxNWYzYmI0OWY0OCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3NDM3NDQ2MjYsImV4cCI6MTc0NDA5MDIyNn0.uBLlph7tsn6V6eAtinQKQKjor-jxqJhGbbnHx1xj4zo
+junie, log anv token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWY2ZTcyOWEzYzMxNWYzYmI0OWY0OCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3NDM3NDQ4MDksImV4cCI6MTc0MzkxNzYwOX0.SOtfRrPhYjzt_KAfv98L17IvFiDWse08mxxj47ogDbA
+
+fuskadmin, reg anv token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWY3MTNiZGVmNjQ5MzM4MTViODRiNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc0Mzc0NTM0MCwiZXhwIjoxNzQ0MDkwOTQwfQ.hHKc8_7Gs50exNBHPFIVjx8Q6-Cnw1_SOn_9UbF1gUs
+
+
+För att komma åt url/sidor som är protected med "authenticateToken" så måste man ha en giltig reg anv token,
+(token man får vid reg), eller giltig log anv token (token man får vid inlogg).
+
+För admin sidorna behövs både "authenticateToken" vara korrekt samt att användaren är "isAdmin: true". 
+Vid registrering är detta inget man kan lägga till själv. 

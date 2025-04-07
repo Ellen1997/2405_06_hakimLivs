@@ -1,28 +1,38 @@
 const express = require("express");
 const mongoproducts = require("../models/mongoproducts.js");
+const Category = require("../models/category.js")
 
 
 const router = express.Router();
 
+router.get("/", async (req, res) => {
 
- // la in denna senare!!Detta är så man kan söka mellan kategorier, vi kommer behöva den sen. 
- router.get("/", async (req, res) => {
     try {
-        const category = req.query.category;
-        const query = category ? { category: category} : {};
+        const categoryName = req.query.category;
 
-        const products = await mongoproducts.find(query);
+        let query = {};
+        if (categoryName) {
+            const category = await Category.findOne({ name: categoryName });
+
+            if (!category) {
+                return res.status(404).json({ message: "Kategori hittades inte!" });
+            }
+
+            query = { category: category._id };
+        }
+
+        const products = await mongoproducts.find(query).populate("category");
+
         res.status(200).json(products);
-    }catch (error) {
+    } catch (error) {
         res.status(500).send({ message: "Något gick fel", error: error.message });
     }
 });
 
-//GET by ID
 router.get('/:id', async (req, res) => {
     try {
 
-        const product = await mongoproducts.findById(req.params.id);
+        const product = await mongoproducts.findById(req.params.id).populate("category");
 
         if (!product) {
             return res.status(404).send({message: 'Produkt inte hittad!'})
@@ -34,7 +44,6 @@ router.get('/:id', async (req, res) => {
 })
 
 
-//POST
 router.post('/', async (req, res) => {
     try {
         const {name, price, description, stock, category, img} = req.body;
@@ -43,12 +52,18 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ message: 'Fyll i alla fält för att skapa produkt' });
         }
 
+        const categoryFound = await Category.findOne({name: category});
+
+        if (!category) {
+            return res.status(404).json({message: "Kategorin hittades ej"})
+        }
+
         const newProduct = new mongoproducts({
             name,
             price,
             description,
             stock,
-            category,
+            category: categoryFound._id,
             img
         });
 
@@ -63,42 +78,42 @@ router.post('/', async (req, res) => {
 });
 
 
-// //PUT
 router.put('/:id', async (req, res) => {
     try {
-        const { id } = req.params
+        const { id } = req.params;
         const { name, description, price, stock, category, img } = req.body;
 
-
-        const product = await mongoproducts.findById(id)
-
-
+        const product = await mongoproducts.findById(id);
         if (!product) {
-            return res.status(404).json({message: 'Produkt kunde ej hittas!'})
+            return res.status(404).json({ message: 'Produkt kunde ej hittas!' });
         }
 
+        let categoryId = product.category;
+        if (category) {
+            const foundCategory = await Category.findOne({ name: category });
+            if (!foundCategory) {
+                return res.status(404).json({ message: 'Kategorin kunde ej hittas!' });
+            }
+            categoryId = foundCategory._id;
+        }
 
         product.name = name || product.name;
         product.description = description || product.description;
         product.price = price || product.price;
         product.stock = stock || product.stock;
-        product.category = category || product.category;
+        product.category = categoryId;
         product.img = img || product.img;
-
 
         await product.save();
 
+        res.status(200).json({ message: 'Produkten uppdaterad!', product });
 
-        res.status(200).json({message: 'Produkten uppdaterad!', product})
-
-
-    }catch (error) {
-        res.status(500).send({message: 'Något gick fel', error})
+    } catch (error) {
+        res.status(500).send({ message: 'Något gick fel', error });
     }
-})
+});
 
 
-//DELETE
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;

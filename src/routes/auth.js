@@ -20,11 +20,12 @@ router.get("/", async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const {username, email, password, isAdmin} = req.body;
+    const {username, email, mobileNumber, password, isAdmin} = req.body;
    
     const user = new User({
       username, 
       email,
+      mobileNumber,
       password,
       isAdmin: isAdmin || false
     })
@@ -34,7 +35,7 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET || 'qwerty123',
-      {expiresIn: '1h'}
+      {expiresIn: '96h'}
     );
     
     res.status(201).json({ user, token });
@@ -72,30 +73,84 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
+router.put('/update', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    
+    const user = await User.findById(userId);
 
-        const userDelete = await User.findByIdAndDelete(id)
-
-        if (!userDelete) {
-            return res.status(404).json({error: 'Användaren hittas inte!'})
-        }
-
-        res.status(200).json({ message: 'Användaren borttagen', deletedUser: userDelete });
-
-    }catch (error) {
-        res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+    if (req.body.username && req.body.username !== user.username) {
+      const usernameFinnsRedan = await User.findOne({ username: req.body.username });
+      if (usernameFinnsRedan) {
+        return res.status(400).json({ error: "Användarnamnet är upptaget" });
+      }
+      user.username = req.body.username;
     }
-})
+
+    if (req.body.email && req.body.email !== user.email) {
+      const emailExists = await User.findOne({ email: req.body.email });
+      if (emailExists) {
+        return res.status(400).json({ error: "Ett konto med denna mejladress finns redan" });
+      }
+      user.email = req.body.email;
+    }
+
+    if (req.body.mobileNumber !== undefined)
+    user.mobileNumber = req.body.mobileNumber 
+
+    if (req.body.password) {
+      user.password = await bcrypt.hash(req.body.password, 10);
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      message: "User uppdaterades",
+      user: { username: user.username, email: user.email, mobileNumber: user.mobileNumber }
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error vid uppdatering", message: error.message });
+  }
+});
+
+router.delete('/delete', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const userDelete = await User.findByIdAndDelete(userId);
+
+    res.status(200).json({ message: 'Ditt konto har tagits bort', deletedUser: userDelete });
+
+  } catch (error) {
+    res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+  }
+});
+
+router.delete('/delete/:id', authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const userDelete = await User.findByIdAndDelete(id);
+
+    if (!userDelete) {
+      return res.status(404).json({ error: 'Användaren hittas inte!' });
+    }
+
+    res.status(200).json({ message: 'Användaren borttagen', deletedUser: userDelete });
+
+  } catch (error) {
+    res.status(500).send({ message: "Något gick fel vid borttagning", error: error.message });
+  }
+});
+
 
 router.get('/protected', authenticateToken, (req, res) => {
-res.json({message: "You have access!", user: req.user})
+res.json({message: "Välkommen, du har åtkomst!", user: req.user})
 
 })
 
 router.get('/admin-only', authenticateToken, isAdmin, (req, res) => {
-  res.render('');
+  res.json({message: 'Välkommen Admin!'});
   
 });
 
