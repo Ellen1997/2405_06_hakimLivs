@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
 
         const categoryFound = await Category.findOne({name: category});
 
-        if (!category) {
+        if (!categoryFound) {
             return res.status(404).json({message: "Kategorin hittades ej"})
         }
 
@@ -133,3 +133,4 @@ router.delete('/:id', async (req, res) => {
 
 
 module.exports = router;
+ 
