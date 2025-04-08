@@ -45,8 +45,10 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+
+  const { email, password} = req.body;
+
   try {
-    const { email, password } = req.body;
     const user = await User.findOne({ email });
 
     if (!user) return res.status(401).json({ error: "Invalid email or password" });
@@ -61,7 +63,11 @@ router.post('/login', async (req, res) => {
 
     
     const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
+      { id: user._id, 
+        isAdmin: user.isAdmin,
+        email: user.email,
+        mobileNumber: user.mobileNumber,
+       },
       process.env.JWT_SECRET || 'qwerty123',
       { expiresIn: '48h' }
     );

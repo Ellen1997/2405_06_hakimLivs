@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const mongproductsRoute = require("./routes/mongproducts.js");
 const categorysRoute = require("./routes/categoryRoute.js")
 const auth = require("./routes/auth.js")
+const userOrders = require("./routes/userOrderRoute.js")
 const path = require("path");
 
 
@@ -27,12 +28,13 @@ mongoose.connect("mongodb+srv://ellenholmgren:Y71UhxXQpLUTf15J@expresscrash.vbre
         });
     })
     .catch((e) =>
-        console.error("MongoDB Atlas connection error:", e)
+        console.error("MongoDB Atlas connection error:", e) 
     );
 
 app.use("/api/products", mongproductsRoute);
 app.use("/api/category", categorysRoute);
 app.use("/api/users", auth);
+app.use("/api/orders", userOrders)
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 
