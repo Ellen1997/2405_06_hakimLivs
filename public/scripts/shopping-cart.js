@@ -80,6 +80,10 @@ let renderCart = () => {
     let button = document.createElement("button");
     button.classList.add("button");
     button.innerHTML = "Gå till kassan";
+    button.addEventListener("click", () => {
+        hideAndShowProduct(cartContainer);
+    })
+
     cartButtonDiv.append(button);
     cartContainer.append(cartButtonDiv);
 
@@ -93,4 +97,21 @@ let renderCart = () => {
     let totalSumProducts = document.querySelector("#totalSumProducts");
     totalSumProducts.innerHTML = `<b>${totalPrice} kr </b>`;
 }
+
+let hideAndShowProduct = (cartContainer) => {
+    cartContainer.setAttribute("inert", "true");
+    cartContainer.style.visibility = "hidden";
+
+    let arrowDown = document.createElement("i");
+    arrowDown.classList.add("arrowDown");
+    arrowDown.style.cursor = "pointer";
+    arrowDown.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+    document.querySelector(".accountDiv").append(arrowDown);
+    arrowDown.addEventListener("click", () => {
+        cartContainer.setAttribute("inert", "false");
+        cartContainer.style.visibility = "visible";
+    })
+    
+}
+
 renderCart();
