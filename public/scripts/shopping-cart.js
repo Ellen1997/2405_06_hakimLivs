@@ -1,5 +1,9 @@
 let renderCart = () => {
     let cartContainer = document.querySelector(".cartContainer");
+    let cartProductCardContainer = document.querySelector(".cartProductCardContainer");
+
+    cartContainer.innerHTML = "";
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     
     if (cart.length === 0) {
@@ -9,15 +13,6 @@ let renderCart = () => {
 
     let totalItems = 0;
     let totalPrice = 0;
-
-    let cartButtonDiv = document.createElement("div");
-    cartButtonDiv.classList.add("cartButtonDiv");
-    document.querySelector(".cartProductCardContainer").append(cartButtonDiv);
-
-    let button = document.createElement("button");
-    button.classList.add("button");
-    button.innerHTML = "Gå till kassan";
-    cartButtonDiv.append(button);
 
     cart.forEach(item => {
         let cartItem = document.createElement("div");
@@ -53,9 +48,17 @@ let renderCart = () => {
 
         let trash = document.createElement("i");
         trash.classList.add("trash");
+        trash.style.cursor = "pointer";
         trash.innerHTML = `
         <i class="fa-solid fa-trash" style="color: #011e62;"></i>
         `;
+        trash.addEventListener("click", () => {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let updatedCart = cart.filter(cartItem => cartItem._id !== item._id);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+            renderCart();
+        })
     
         let hr = document.createElement("hr");
         hr.style.width = 100;
@@ -71,6 +74,15 @@ let renderCart = () => {
         totalItems += item.amount;
         totalPrice += item.amount * item.price;
     });
+
+    let cartButtonDiv = document.createElement("div");
+    cartButtonDiv.classList.add("cartButtonDiv");
+    let button = document.createElement("button");
+    button.classList.add("button");
+    button.innerHTML = "Gå till kassan";
+    cartButtonDiv.append(button);
+    cartContainer.append(cartButtonDiv);
+
 
     let totalContainer = document.createElement("div");
     totalContainer.classList.add("totalContainer");
