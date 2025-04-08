@@ -418,6 +418,8 @@ li a{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 10rem;
+  align-items: center;
 }
 
 .cartButtonDiv{
@@ -560,11 +562,21 @@ li a{
 .namePriceAmountDiv{
   display: flex;
   flex-direction: column;
+  padding: 2rem;
+}
+
+.namePriceAmountDiv p {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .imgAndProductInfo{
   display: flex;
   flex-direction: row;
+}
+
+.trash{
+  padding: 2%;
 }
 
 /* Login */

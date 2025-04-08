@@ -7,10 +7,18 @@ let renderCart = () => {
         return;
     }
 
-    let totalItems = 0; // För att hålla koll på totalt antal produkter
-    let totalPrice = 0; // För att hålla koll på totalt pris
+    let totalItems = 0;
+    let totalPrice = 0;
 
-    // Skapa HTML för varje produkt i varukorgen
+    let cartButtonDiv = document.createElement("div");
+    cartButtonDiv.classList.add("cartButtonDiv");
+    document.querySelector(".cartProductCardContainer").append(cartButtonDiv);
+
+    let button = document.createElement("button");
+    button.classList.add("button");
+    button.innerHTML = "Gå till kassan";
+    cartButtonDiv.append(button);
+
     cart.forEach(item => {
         let cartItem = document.createElement("div");
         cartItem.classList.add("cartItem");
@@ -29,54 +37,36 @@ let renderCart = () => {
         productImg.classList.add("cartProductImg");
 
         let productName = document.createElement("p");
-        productName.innerHTML = item.product;
+        productName.innerHTML = `<strong>${item.product}</strong>`;
 
         let productPrice = document.createElement("p");
         productPrice.innerHTML = `${item.price} kr`;
 
-        let productAmount = document.createElement("p");
-        productAmount.innerHTML = `Antal: ${item.amount} st`;
-
         let itemTotalPrice = document.createElement("p");
-        itemTotalPrice.innerHTML = `Totalt: ${item.amount * item.price} kr`;
+        itemTotalPrice.innerHTML = `<strong>${item.amount * item.price} kr </strong>`;
 
-        let counterContainer = document.createElement("div");
-        counterContainer.classList.add("counterContainer");
-    
-        let inputQuantity = document.createElement("input");
-        inputQuantity.type = "numeric";
-        inputQuantity.value = 1;
-        inputQuantity.classList.add("inputQuantity");
-    
-        let plusButton = document.createElement("button");
-        plusButton.innerHTML = "+";
-        plusButton.classList.add("plusButton");
-        plusButton.addEventListener("click", () => {
-            let newQuantity = parseInt(inputQuantity.value) + 1;
-            inputQuantity.value = newQuantity;
-            updateCart(product, newQuantity);
-        });
-    
-        let minusButton = document.createElement("button");
-        minusButton.innerHTML = "-";
-        minusButton.classList.add("minusButton");
-        minusButton.addEventListener("click", () => {
-            let newQuantity = parseInt(inputQuantity.value) - 1;
-            if (newQuantity > 0) {
-                inputQuantity.value = newQuantity;
-                updateCart(product, newQuantity);
-            }
-        });
+        let counterProductContainer = document.createElement("div");
+        counterProductContainer.classList.add("counterProductContainer");
+        
+        let productAmount = document.createElement("p");
+        productAmount.innerHTML = `${item.amount} st`;
 
+        let trash = document.createElement("i");
+        trash.classList.add("trash");
+        trash.innerHTML = `
+        <i class="fa-solid fa-trash" style="color: #011e62;"></i>
+        `;
+    
         let hr = document.createElement("hr");
         hr.style.width = 100;
         hr.style.margin = 0;
     
         imgAndProductInfo.append(productImg, namePriceAmountDiv);
-        counterContainer.append(minusButton, inputQuantity, plusButton);
-        cartProductAndButton.append(imgAndProductInfo, counterContainer);
-        namePriceAmountDiv.append(productName,productPrice,productAmount,itemTotalPrice);
-        cartContainer.append(cartProductAndButton, hr);
+        counterProductContainer.append(productAmount);
+        cartProductAndButton.append(imgAndProductInfo, counterProductContainer);
+        namePriceAmountDiv.append(productName,productPrice,itemTotalPrice);
+        cartContainer.append(cartProductAndButton,trash, hr);
+        
 
         totalItems += item.amount;
         totalPrice += item.amount * item.price;
