@@ -55,5 +55,27 @@ saveBtn.addEventListener("click", async () => {
 fetchCategories();
 
 
+document.querySelector("#admin-form-add-category").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const newCategory = {
+        name: document.querySelector("#admin-input-add-category").value,
+        description: document.querySelector("#admin-input-add-category-description").value
+    };
+
+    try {
+        await axios.post("https://be-webshop-2025-fe-two.vercel.app/api/category", newCategory)
+        alert("Kategori har lagts till!");
+        document.querySelector("#admin-input-add-category").value = "";
+        document.querySelector("#admin-input-add-category-description").value = "";
+        fetchCategories();
+    } catch (error){
+        console.log("Error: Kategorin kunde inte läggas till:", error);
+    }
+});
+
+
+
+
 
 
