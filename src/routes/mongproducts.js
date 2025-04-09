@@ -29,6 +29,29 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/search", async (req, res) => {
+    try {
+        const searchQuery = req.query.q;
+
+        if (!searchQuery) {
+            return res.status(400).json({ message: "Skriv minst en bokstav för att söka efter produkter" });
+        }
+
+        const regex = new RegExp(searchQuery, 'i');
+
+        const products = await mongoproducts.find({ name: { $regex: regex } }).populate("category");
+
+        if (products.length === 0) {
+            return res.status(404).json({ message: "Inga produkter matchade sökningen" });
+        }
+
+        res.status(200).json(products);
+
+    } catch (error) {
+        res.status(500).json({ message: "Något gick fel vid sökningen", error: error.message });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
 
