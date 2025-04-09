@@ -1,5 +1,9 @@
 let renderCart = () => {
     let cartContainer = document.querySelector(".cartContainer");
+    let cartProductCardContainer = document.querySelector(".cartProductCardContainer");
+
+    cartContainer.innerHTML = "";
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     
     if (cart.length === 0) {
@@ -9,15 +13,6 @@ let renderCart = () => {
 
     let totalItems = 0;
     let totalPrice = 0;
-
-    let cartButtonDiv = document.createElement("div");
-    cartButtonDiv.classList.add("cartButtonDiv");
-    document.querySelector(".cartProductCardContainer").append(cartButtonDiv);
-
-    let button = document.createElement("button");
-    button.classList.add("button");
-    button.innerHTML = "Gå till kassan";
-    cartButtonDiv.append(button);
 
     cart.forEach(item => {
         let cartItem = document.createElement("div");
@@ -53,9 +48,17 @@ let renderCart = () => {
 
         let trash = document.createElement("i");
         trash.classList.add("trash");
+        trash.style.cursor = "pointer";
         trash.innerHTML = `
         <i class="fa-solid fa-trash" style="color: #011e62;"></i>
         `;
+        trash.addEventListener("click", () => {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let updatedCart = cart.filter(cartItem => cartItem._id !== item._id);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+            renderCart();
+        })
     
         let hr = document.createElement("hr");
         hr.style.width = 100;
@@ -72,6 +75,21 @@ let renderCart = () => {
         totalPrice += item.amount * item.price;
     });
 
+    let cartButtonDiv = document.createElement("div");
+    cartButtonDiv.classList.add("cartButtonDiv");
+    let goToCheckoutBtn = document.createElement("button");
+    goToCheckoutBtn.classList.add("button");
+    goToCheckoutBtn.classList.add("goToCheckoutBtn");
+    goToCheckoutBtn.innerHTML = "Gå till kassan";
+    goToCheckoutBtn.addEventListener("click", () => {
+        hideAndShowProduct(cartContainer,goToCheckoutBtn);
+        paymentStage(cartProductCardContainer);
+    })
+
+    cartButtonDiv.append(goToCheckoutBtn);
+    cartContainer.append(cartButtonDiv);
+
+
     let totalContainer = document.createElement("div");
     totalContainer.classList.add("totalContainer");
 
@@ -81,4 +99,103 @@ let renderCart = () => {
     let totalSumProducts = document.querySelector("#totalSumProducts");
     totalSumProducts.innerHTML = `<b>${totalPrice} kr </b>`;
 }
+
+let hideAndShowProduct = (cartContainer,goToCheckoutBtn) => {
+    goToCheckoutBtn.remove();
+    let arrowToggle = document.createElement("i");
+    arrowToggle.classList.add("arrowToggle");
+    arrowToggle.style.cursor = "pointer";
+    arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+    document.querySelector(".accountDiv").append(arrowToggle);
+
+    cartContainer.style.visibility = "hidden";
+    cartContainer.setAttribute("inert", "true");
+    arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+    document.querySelector(".cartProductCardContainer").style.height = "10rem";
+
+    let paymentWrapper = document.querySelector(".paymentWrapper");
+    paymentWrapper.style.display = "block";
+
+    let state = "hidden";
+
+    arrowToggle.addEventListener("click", () => {
+    switch(state) {
+        case "hidden":
+            cartContainer.style.visibility = "visible";
+            cartContainer.removeAttribute("inert");
+            arrowToggle.innerHTML = `<i class="fa-solid fa-angle-up" style="color: #F90035;"></i>`;
+            document.querySelector(".cartProductCardContainer").style.height = "auto";
+            state = "visible";
+            break;
+        case "visible":
+            cartContainer.style.visibility = "hidden";
+            cartContainer.setAttribute("inert", "true");
+            arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+            document.querySelector(".cartProductCardContainer").style.height = "10rem";
+            state = "hidden";
+            break;
+    }
+});
+
+}
+
+let paymentStage = (cartProductCardContainer) => {
+    let paymentWrapper = document.querySelector(".paymentWrapper");
+    let paymentContainer = document.createElement("div");
+    paymentContainer.classList.add("paymentContainer");
+
+    let payment = document.createElement("h2");
+    payment.innerHTML = "BETALNING";
+    
+    let paymentOptions = document.createElement("div");
+    paymentOptions.classList.add("paymentOptions");
+
+    let checkBox = document.createElement("i");
+    checkBox.innerHTML =`<i class="fa-solid fa-square-check" style="color: #9c9ea0;"></i>`
+
+    let optionsContainer = document.createElement("div");
+    optionsContainer.classList.add("optionsContainer");
+
+    let klarnaImg = document.createElement("img");
+    klarnaImg.src = "/public/Bilder/klarna.png";
+    klarnaImg.style.height = "20px";
+    klarnaImg.style.width = "20px";
+
+    let klarnaInvoice = document.createElement("p");
+    klarnaInvoice.innerText = "Klarna - betala med faktura";
+
+    let buyNowBtn = document.createElement("button");
+    buyNowBtn.classList.add("button");
+    buyNowBtn.classList.add("buyNowBtn");
+    buyNowBtn.innerHTML = "Köp nu";
+    buyNowBtn.addEventListener("click", () => {
+        
+        document.querySelector(".productAndPaymentContainer").style.visibility = "hidden";
+        document.querySelector(".productAndPaymentContainer").setAttribute("inert", "true");
+    
+        let thankyouText = document.createElement("div");
+        thankyouText.classList.add("thankyouText");
+
+        let thankYou = document.createElement("h2");
+        thankYou.innerHTML = "TACK FÖR DITT KÖP!";
+
+        let p1 = document.createElement("p");
+        p1.innerText = `På mina sidor kan du se din orderbekräftelse.`
+        let p2 = document.createElement("p");
+        p2.innerText = `Hakim packar nu din order och skickas inom 2 dagar.`
+
+        cartProductCardContainer.style.visibility = "visible";
+        cartProductCardContainer.setAttribute("inert", "false");
+        cartProductCardContainer.innerHTML = "";
+
+        cartProductCardContainer.append(thankyouText);
+        thankyouText.append(thankYou,p1,p2);
+    })
+
+    paymentWrapper.append(paymentContainer);
+    paymentContainer.append(payment,paymentOptions,buyNowBtn);
+    paymentOptions.append(optionsContainer);
+    optionsContainer.append(checkBox,klarnaImg,klarnaInvoice);
+}
+
 renderCart();
