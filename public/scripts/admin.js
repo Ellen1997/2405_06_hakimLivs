@@ -17,15 +17,14 @@ const clearInput = () => {
 
 const fetchCategories = async () => {
     try {
-        const response = await axios.get("https://be-webshop-2025-fe-two.vercel.app/api/products/?category=");
+        const response = await axios.get("https://be-webshop-2025-fe-two.vercel.app/api/category");
         const categories = response.data;
 
         categorySelect.innerHTML = `<option disabled selected>Välj kategori</option>`;
 
         categories.forEach(category => {
             let option = document.createElement("option");
-            option.value = category._id;
-            option.textContent = category.category; 
+            option.textContent = category.name; 
             categorySelect.appendChild(option);
         });
 
@@ -54,6 +53,28 @@ saveBtn.addEventListener("click", async () => {
 });
 
 fetchCategories();
+
+
+document.querySelector("#admin-form-add-category").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const newCategory = {
+        name: document.querySelector("#admin-input-add-category").value,
+        description: document.querySelector("#admin-input-add-category-description").value
+    };
+
+    try {
+        await axios.post("https://be-webshop-2025-fe-two.vercel.app/api/category", newCategory)
+        alert("Kategori har lagts till!");
+        document.querySelector("#admin-input-add-category").value = "";
+        document.querySelector("#admin-input-add-category-description").value = "";
+        fetchCategories();
+    } catch (error){
+        console.log("Error: Kategorin kunde inte läggas till:", error);
+    }
+});
+
+
 
 
 

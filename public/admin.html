@@ -112,9 +112,13 @@
                     <h2 class="admin-h2-add">Addera ny kategori</h2>
                     <div class="admin-add-category-input-container">
                         <label for="admin-input-add-category" class="admin-label-add-category">Skapa ny kategori</label>
-                        <input type="text" placeholder="" class="admin-input-add-category" id="admin-input-add-category">
+                        <input type="text" placeholder="" class="admin-input-add-category" id="admin-input-add-category" required />
+
+                        <label for="admin-input-add-category-description" class="admin-input-add-category-description-label">Kategori beskrivning</label>
+                        <input type="text" placeholder="" class="admin-input-add-category-description" id="admin-input-add-category-description" required />
+
                         <div class="admin-save-button-container">
-                            <button class="button" id="admin-save-category-button">Spara</button>
+                            <button type="submit" class="button admin-save-category-button" id="admin-save-category-button">Spara</button>
                         </div>
                     </div>
                 </form>

@@ -3,6 +3,8 @@ let renderPage = async () => {
     try {
         let response = await axios.get("https://be-webshop-2025-fe-two.vercel.app/api/products/");
         let products = response.data;
+        console.log("Antal produkter:", products.length);
+        console.log("Produkter:", products);
         
         products.forEach(product => {
             let productCard = document.createElement("div");
@@ -11,7 +13,7 @@ let renderPage = async () => {
             productCard.dataset.name = product.name;
             productCard.dataset.price = product.price;
             productCard.dataset.description = product.description;
-            productCard.dataset.category = product.category;
+            productCard.dataset.category = product.category ? product.category.name : "Ingen kategori";
             productCard.dataset.stock = product.stock;
             productCard.dataset.image = product.img;
             
@@ -43,7 +45,6 @@ let renderPage = async () => {
             buttonContainer.appendChild(editButton);
 
             editButton.addEventListener("click", () => openEditModal(productCard));
-            console.log(productCard);
 
             let deleteButton = document.createElement("button");
             deleteButton.classList.add("button", "icon-button");
@@ -104,7 +105,28 @@ closeButton.addEventListener("click", () => {
     editModal.style.display = "none";
 });
 
-let openEditModal = (productElement) => {
+let fetchCategories = async () => {
+    try {
+        let response = await axios.get("https://be-webshop-2025-fe-two.vercel.app/api/category");
+        let categories = response.data;
+        let categorySelect = document.querySelector("#admin-product-category");
+
+        categorySelect.innerHTML = `<option disabled selected>Välj kategori</option>`;
+
+        categories.forEach(category => {
+            let option = document.createElement("option");
+            option.value = category.name;
+            option.textContent = category.name;
+            categorySelect.appendChild(option);
+        });
+    } catch (error) {
+        console.log("Error fetching categories:", error);
+    }
+};
+
+let openEditModal = async (productElement) => {
+    await fetchCategories(); 
+
     editModal.dataset.id = productElement.dataset.id;
     document.querySelector("#product-name").value = productElement.dataset.name;
     document.querySelector("#product-price").value = productElement.dataset.price;
