@@ -101,12 +101,13 @@ let renderPage = async () => {
 
 let addToCart = (product, quantity) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let existingProduct = cart.find(item => item.product === product.name);
+    let existingProduct = cart.find(item => item._id === product._id);
 
     if (existingProduct) {
         existingProduct.amount += quantity;
     } else {
         cart.push({
+            _id: product._id,
             product: product.name,
             price: product.price,
             img: product.img,
@@ -120,13 +121,13 @@ let addToCart = (product, quantity) => {
 
 let updateCart = (product, quantity) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let existingProduct = cart.find(item => item.product === product.name);
+    let existingProduct = cart.find(item => item._id === product._id);
 
     if (existingProduct) {
         if (quantity > 0) {
             existingProduct.amount = quantity;
         } else {
-            cart = cart.filter(item => item.product !== product.name);
+            cart = cart.filter(item => item._id !== product._id);
         }
     }
 
