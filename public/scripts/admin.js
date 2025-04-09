@@ -17,15 +17,14 @@ const clearInput = () => {
 
 const fetchCategories = async () => {
     try {
-        const response = await axios.get("https://be-webshop-2025-fe-two.vercel.app/api/products/?category=");
+        const response = await axios.get("https://be-webshop-2025-fe-two.vercel.app/api/category");
         const categories = response.data;
 
         categorySelect.innerHTML = `<option disabled selected>Välj kategori</option>`;
 
         categories.forEach(category => {
             let option = document.createElement("option");
-            option.value = category._id;
-            option.textContent = category.category; 
+            option.textContent = category.name; 
             categorySelect.appendChild(option);
         });
 
