@@ -77,14 +77,16 @@ let renderCart = () => {
 
     let cartButtonDiv = document.createElement("div");
     cartButtonDiv.classList.add("cartButtonDiv");
-    let button = document.createElement("button");
-    button.classList.add("button");
-    button.innerHTML = "Gå till kassan";
-    button.addEventListener("click", () => {
-        hideAndShowProduct(cartContainer);
+    let goToCheckoutBtn = document.createElement("button");
+    goToCheckoutBtn.classList.add("button");
+    goToCheckoutBtn.classList.add("goToCheckoutBtn");
+    goToCheckoutBtn.innerHTML = "Gå till kassan";
+    goToCheckoutBtn.addEventListener("click", () => {
+        hideAndShowProduct(cartContainer,goToCheckoutBtn);
+        paymentStage(cartContainer);
     })
 
-    cartButtonDiv.append(button);
+    cartButtonDiv.append(goToCheckoutBtn);
     cartContainer.append(cartButtonDiv);
 
 
@@ -98,20 +100,75 @@ let renderCart = () => {
     totalSumProducts.innerHTML = `<b>${totalPrice} kr </b>`;
 }
 
-let hideAndShowProduct = (cartContainer) => {
-    cartContainer.setAttribute("inert", "true");
-    cartContainer.style.visibility = "hidden";
+let hideAndShowProduct = (cartContainer,goToCheckoutBtn) => {
+    goToCheckoutBtn.remove();
+    let arrowToggle = document.createElement("i");
+    arrowToggle.classList.add("arrowToggle");
+    arrowToggle.style.cursor = "pointer";
+    arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+    document.querySelector(".accountDiv").append(arrowToggle);
 
-    let arrowDown = document.createElement("i");
-    arrowDown.classList.add("arrowDown");
-    arrowDown.style.cursor = "pointer";
-    arrowDown.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
-    document.querySelector(".accountDiv").append(arrowDown);
-    arrowDown.addEventListener("click", () => {
-        cartContainer.setAttribute("inert", "false");
-        cartContainer.style.visibility = "visible";
-    })
+    cartContainer.style.visibility = "hidden";
+    cartContainer.setAttribute("inert", "true");
+    arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+    document.querySelector(".cartProductCardContainer").style.height = "10rem";
+
+    let paymentWrapper = document.querySelector(".paymentWrapper");
+    paymentWrapper.style.display = "block";
+
+    let state = "hidden";
+
+    arrowToggle.addEventListener("click", () => {
+    switch(state) {
+        case "hidden":
+            cartContainer.style.visibility = "visible";
+            cartContainer.removeAttribute("inert");
+            arrowToggle.innerHTML = `<i class="fa-solid fa-angle-up" style="color: #F90035;"></i>`;
+            document.querySelector(".cartProductCardContainer").style.height = "auto";
+            state = "visible";
+            break;
+        case "visible":
+            cartContainer.style.visibility = "hidden";
+            cartContainer.setAttribute("inert", "true");
+            arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+            document.querySelector(".cartProductCardContainer").style.height = "10rem";
+            state = "hidden";
+            break;
+    }
+});
+
+}
+
+let paymentStage = (cartContainer) => {
+    let paymentWrapper = document.querySelector(".paymentWrapper");
+    let paymentDiv = document.createElement("div");
+    paymentDiv.classList.add("paymentContainer");
+
+    let payment = document.createElement("h2");
+    payment.innerHTML = "BETALNING";
     
+    let paymentOptions = document.createElement("div");
+    paymentOptions.classList.add("paymentOptions");
+
+    let checkBox = document.createElement("i");
+    checkBox.innerHTML =`<i class="fa-solid fa-square-check" style="color: #9c9ea0;"></i>`
+
+    let klarnaImg = document.createElement("img");
+    klarnaImg.src = "/public/Bilder/klarna.png";
+    klarnaImg.style.height = "30px";
+    klarnaImg.style.width = "30px";
+
+    let klarnaInvoice = document.createElement("p");
+    klarnaInvoice.innerText = "Klarna - betala med faktura";
+
+    let buyNowBtn = document.createElement("button");
+    buyNowBtn.classList.add("button");
+    buyNowBtn.classList.add("buyNowBtn");
+    buyNowBtn.innerHTML = "Köp nu";
+
+    paymentWrapper.append(paymentDiv);
+    paymentDiv.append(payment,paymentOptions,buyNowBtn);
+    paymentOptions.append(checkBox,klarnaImg,klarnaInvoice);
 }
 
 renderCart();
