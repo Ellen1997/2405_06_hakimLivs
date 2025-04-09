@@ -83,7 +83,7 @@ let renderCart = () => {
     goToCheckoutBtn.innerHTML = "Gå till kassan";
     goToCheckoutBtn.addEventListener("click", () => {
         hideAndShowProduct(cartContainer,goToCheckoutBtn);
-        paymentStage(cartContainer);
+        paymentStage(cartProductCardContainer);
     })
 
     cartButtonDiv.append(goToCheckoutBtn);
@@ -139,10 +139,10 @@ let hideAndShowProduct = (cartContainer,goToCheckoutBtn) => {
 
 }
 
-let paymentStage = (cartContainer) => {
+let paymentStage = (cartProductCardContainer) => {
     let paymentWrapper = document.querySelector(".paymentWrapper");
-    let paymentDiv = document.createElement("div");
-    paymentDiv.classList.add("paymentContainer");
+    let paymentContainer = document.createElement("div");
+    paymentContainer.classList.add("paymentContainer");
 
     let payment = document.createElement("h2");
     payment.innerHTML = "BETALNING";
@@ -153,10 +153,13 @@ let paymentStage = (cartContainer) => {
     let checkBox = document.createElement("i");
     checkBox.innerHTML =`<i class="fa-solid fa-square-check" style="color: #9c9ea0;"></i>`
 
+    let optionsContainer = document.createElement("div");
+    optionsContainer.classList.add("optionsContainer");
+
     let klarnaImg = document.createElement("img");
     klarnaImg.src = "/public/Bilder/klarna.png";
-    klarnaImg.style.height = "30px";
-    klarnaImg.style.width = "30px";
+    klarnaImg.style.height = "20px";
+    klarnaImg.style.width = "20px";
 
     let klarnaInvoice = document.createElement("p");
     klarnaInvoice.innerText = "Klarna - betala med faktura";
@@ -165,10 +168,34 @@ let paymentStage = (cartContainer) => {
     buyNowBtn.classList.add("button");
     buyNowBtn.classList.add("buyNowBtn");
     buyNowBtn.innerHTML = "Köp nu";
+    buyNowBtn.addEventListener("click", () => {
+        
+        document.querySelector(".productAndPaymentContainer").style.visibility = "hidden";
+        document.querySelector(".productAndPaymentContainer").setAttribute("inert", "true");
+    
+        let thankyouText = document.createElement("div");
+        thankyouText.classList.add("thankyouText");
 
-    paymentWrapper.append(paymentDiv);
-    paymentDiv.append(payment,paymentOptions,buyNowBtn);
-    paymentOptions.append(checkBox,klarnaImg,klarnaInvoice);
+        let thankYou = document.createElement("h2");
+        thankYou.innerHTML = "TACK FÖR DITT KÖP!";
+
+        let p1 = document.createElement("p");
+        p1.innerText = `På mina sidor kan du se din orderbekräftelse.`
+        let p2 = document.createElement("p");
+        p2.innerText = `Hakim packar nu din order och skickas inom 2 dagar.`
+
+        cartProductCardContainer.style.visibility = "visible";
+        cartProductCardContainer.setAttribute("inert", "false");
+        cartProductCardContainer.innerHTML = "";
+
+        cartProductCardContainer.append(thankyouText);
+        thankyouText.append(thankYou,p1,p2);
+    })
+
+    paymentWrapper.append(paymentContainer);
+    paymentContainer.append(payment,paymentOptions,buyNowBtn);
+    paymentOptions.append(optionsContainer);
+    optionsContainer.append(checkBox,klarnaImg,klarnaInvoice);
 }
 
 renderCart();
