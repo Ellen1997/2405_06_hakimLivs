@@ -91,7 +91,7 @@ let renderCart = () => {
         }
 
         hideAndShowProduct(cartContainer,goToCheckoutBtn);
-        paymentStage(cartProductCardContainer);
+        paymentStage(cartProductCardContainer,totalPrice);
     })
 
     cartButtonDiv.append(goToCheckoutBtn);
@@ -148,7 +148,7 @@ let hideAndShowProduct = (cartContainer,goToCheckoutBtn) => {
 
 }
 
-let paymentStage = (cartProductCardContainer) => {
+let paymentStage = (cartProductCardContainer,totalPrice) => {
     let paymentWrapper = document.querySelector(".paymentWrapper");
     let paymentContainer = document.createElement("div");
     paymentContainer.classList.add("paymentContainer");
@@ -177,29 +177,61 @@ let paymentStage = (cartProductCardContainer) => {
     buyNowBtn.classList.add("button");
     buyNowBtn.classList.add("buyNowBtn");
     buyNowBtn.innerHTML = "Köp nu";
-    buyNowBtn.addEventListener("click", () => {
-        
+    buyNowBtn.addEventListener("click", async () => {
+        const token = localStorage.getItem("token");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (!token) {
+        alert("Du måste vara inloggad för att göra en beställning.");
+        return;
+        } 
+        if (cart.length === 0) {
+        alert("Din varukorg är tom.");
+        return;
+        }
+        let order = {
+            products: cart.map(item => ({
+            name: item.product,
+            quantity: item.amount,
+            price: item.price
+        })),
+          total: totalPrice,
+        };
+        console.log(order);
+
+        try {
+        const response = await axios.post("https://be-webshop-2025-fe-two.vercel.app/api/orders/",
+            order,{
+            headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            },
+            });
+         console.log("Order skickad:", response.data);
+        localStorage.removeItem("cart");
         document.querySelector(".productAndPaymentContainer").style.visibility = "hidden";
         document.querySelector(".productAndPaymentContainer").setAttribute("inert", "true");
     
         let thankyouText = document.createElement("div");
         thankyouText.classList.add("thankyouText");
-
+    
         let thankYou = document.createElement("h2");
         thankYou.innerHTML = "TACK FÖR DITT KÖP!";
-
+    
         let p1 = document.createElement("p");
-        p1.innerText = `På mina sidor kan du se din orderbekräftelse.`
+        p1.innerText = "På Mina sidor kan du se din orderbekräftelse.";
         let p2 = document.createElement("p");
-        p2.innerText = `Hakim packar nu din order och skickas inom 2 dagar.`
-
+        p2.innerText = "Hakim packar nu din order och skickar den inom 2 dagar.";
         cartProductCardContainer.style.visibility = "visible";
-        cartProductCardContainer.setAttribute("inert", "false");
+        cartProductCardContainer.removeAttribute("inert");
         cartProductCardContainer.innerHTML = "";
-
         cartProductCardContainer.append(thankyouText);
-        thankyouText.append(thankYou,p1,p2);
-    })
+        thankyouText.append(thankYou, p1, p2);
+    } catch (error) {
+        console.error("Något gick fel vid beställningen:", error);
+        alert("Kunde inte slutföra köpet. Försök igen senare.");
+        }
+    });
 
     paymentWrapper.append(paymentContainer);
     paymentContainer.append(payment,paymentOptions,buyNowBtn);
