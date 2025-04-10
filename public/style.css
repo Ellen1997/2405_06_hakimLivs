@@ -421,13 +421,18 @@ li a {
 }
 .cartProductCardContainer {
   background-color: var(--box-color);
-  width: 65%;
   display: flex;
   flex-direction: column;
   padding: 2%;
 }
 
-.cartContainer {
+.thankyouText{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cartContainer{
   display: flex;
   flex-direction: column;
 }
@@ -436,6 +441,8 @@ li a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 10rem;
+  align-items: center;
 }
 
 .cartButtonDiv {
@@ -578,11 +585,69 @@ li a {
 .namePriceAmountDiv {
   display: flex;
   flex-direction: column;
+  padding: 2rem;
+}
+
+.namePriceAmountDiv p {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .imgAndProductInfo {
   display: flex;
   flex-direction: row;
+}
+
+.trash{
+  padding: 2%;
+}
+
+.accountDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 6%;
+}
+
+.productAndPaymentContainer{
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+.paymentContainer {
+  background-color: var(--box-color);
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  margin-top: 2%;
+}
+
+.paymentOptions{
+  border-radius: 10px;
+  border: var(--frame-grey) 1px solid;
+  background-color: rgba(232, 232, 232, 0.894);
+  display: flex;
+  justify-content: flex-start;
+  padding: 1%;
+}
+
+.optionsContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%
+}
+
+.buyNowBtn{
+  align-self: center;
+  margin: 2%;
+}
+.thankyouText p {
+margin-block-start: 0em;
+margin-block-end: 0em;
+padding: 0.5rem;
 }
 
 /* Login */
@@ -785,6 +850,12 @@ footer.footer {
   border-radius: 5px;
   font-size: 1rem;
 }
+
 .admin-input-add-category {
   width: 16%;
 }
+
+.admin-input-add-category-description{
+  width: 25%;
+}
+
