@@ -37,6 +37,14 @@
       "dest": "src/server.js"
     },
     {
+      "src": "/api/orders",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/api/orders/(.*)",
+      "dest": "src/server.js"
+    },
+    {
       "src": "/test",
       "dest": "/public/__tests__/indexxx.html"
     },

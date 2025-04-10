@@ -1,107 +1,132 @@
-const openModalBtn = document.querySelector("#openModalBtn"); 
-const closeModalBtn = document.querySelector("#closeModal"); 
-const loginModal = document.querySelector("#loginModal"); 
+const loginModal = document.querySelector("#loginModal");
+const createAccountModal = document.querySelector("#createAccountModal");
 const accountModal = document.querySelector("#accountModal");
+
+const openModalBtn = document.querySelector("#openModalBtn");
+const closeModal = document.querySelector("#closeModal");
+const closeCreateAccountModal = document.querySelector(
+  "#closeCreateAccountModal"
+);
+const closeAccountModal = document.querySelector("#closeAccountModal");
+const createAccountBtn = document.querySelector("#createAccountBtn");
+const loginForm = document.querySelector(".loginForm");
+
+const registerForm = document.querySelector("#registerForm");
+const email = document.querySelector("#email-input-register");
+const mobileNumber = document.querySelector("#mobile-input-register");
+const password = document.querySelector("#password-input-register");
 const logoutBtn = document.querySelector("#logoutBtn");
 
-const loginForm = document.querySelector(".loginForm");
-const loginText = document.querySelector("#loginText");
-const createAccountBtn = document.querySelector("#btn-create-account");
-
-const emailInput = document.querySelector("#username-input-login");
-const passwordInput = document.querySelector("#password-input-login");
-let currentUser = localStorage.getItem("currentUser");
-
-openModalBtn.addEventListener("click", (e) =>{
-e.preventDefault();
-if(!currentUser){
-    loginModal.style.display = "block";
-}else{
-    accountModal.style.display = "block";
-}
+openModalBtn.addEventListener("click", () => {
+  showModal(loginModal);
 });
 
-closeModalBtn.addEventListener("click", (e) =>{
-    loginModal.style.display = "none";
-    accountModal.style.display = "none";
+closeModal.addEventListener("click", () => {
+  hideModal(loginModal);
 });
 
-window.addEventListener("DOMContentLoaded", () =>{
-
-    if (!localStorage.getItem("currentUser")){
-        loginModal.style.display = "none";
-    }else{
-        accountModal.style.display = "none";
-    }
+closeCreateAccountModal.addEventListener("click", () => {
+  hideModal(createAccountModal);
 });
 
-loginForm.addEventListener("submit", (e)=>{
-    e.preventDefault();
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-    
-    if(!email || !password){
-        alert("Vänligen fyll i både e-post och lösenord för att logga in.");
-        return;
-    }
-    
-    const users = JSON.parse(localStorage.getItem("users")) || {};
-
-    if (users[email] && users[email] === password) {
-        localStorage.setItem("currentUser", email);
-        loginModal.style.display = "none";
-        loginState();
-
-        const siteContent = document.querySelector("siteContent");
-        if(siteContent) siteContent.style.display = "none";
-    } else {
-        alert("Inloggning misslyckades. Du har uppgett ett felaktigt användarnamn eller lösenord.");
-    }
+closeAccountModal.addEventListener("click", () => {
+  hideModal(accountModal);
 });
 
 createAccountBtn.addEventListener("click", () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    if (!email || !password) {
-        alert("Vänligen fyll i både email och lösenord.");
-        return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users")) || {};
-
-    if (users[email]) {
-        alert("Denna användare finns redan. Logga in istället.");
-        return;
-    }
-
-    users[email] = password;
-    localStorage.setItem("users", JSON.stringify(users));
-
-    localStorage.setItem("currentUser", email);
-
-    loginModal.style.display = "none";
-    loginState();
-
-    const siteContent = document.querySelector("#siteContent");
-    if(siteContent) siteContent.style.display = "block";
+  email.value = "";
+  mobileNumber.value = "";
+  password.value = "";
+  hideModal(loginModal);
+  showModal(createAccountModal);
 });
 
-logoutBtn.addEventListener("click", () =>{
-    localStorage.removeItem("currentUser");
-    loginState();
-    accountModal.style.display = "none";
-});
-
-const loginState =()=>{
-    currentUser = localStorage.getItem("currentUser");
-
-    if(!currentUser){
-        loginText.textContent = "Logga in";
-    } else {
-        loginText.textContent = "Ditt konto";
-    }
+function showModal(modal) {
+  modal?.classList.add("show");
+  modal?.classList.remove("hide");
 }
 
-window.addEventListener("DOMContentLoaded", loginState);
+function hideModal(modal) {
+  modal?.classList.remove("show");
+  modal?.classList.add("hide");
+}
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email-input-login").value;
+  const password = document.getElementById("password-input-login").value;
+
+  try {
+    const response = await fetch(
+      "https://be-webshop-2025-fe-two.vercel.app/api/users/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      document.getElementById("loginText").innerHTML = "Ditt Konto";
+      hideModal(loginModal);
+      showModal(accountModal);
+    } else {
+      alert(
+        data.error ||
+          "Inloggning misslyckades. Du har uppgett ett felaktigt användarnamn eller lösenord"
+      );
+    }
+  } catch (error) {
+    alert("Något gick fel vid inloggning.");
+  }
+});
+
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const emailValue = email.value.trim();
+  const mobileNumberValue = mobileNumber.value.trim();
+  const passwordValue = password.value;
+
+  try {
+    const response = await fetch(
+      "https://be-webshop-2025-fe-two.vercel.app/api/users/register",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailValue,
+          mobileNumber: mobileNumberValue,
+          password: passwordValue,
+          username: emailValue.split("@")[0],
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      hideModal(createAccountModal);
+      showModal(accountModal);
+    } else {
+      alert(data.error || "kunde inte skapa konto.");
+    }
+  } catch (error) {
+    alert("Någon gick fel vid registering.");
+  }
+});
+
+logoutBtn.addEventListener("click", () => {
+  localStorage.removeItem("token");
+  document.getElementById("loginText").innerHTML = "Logga in";
+  hideModal(accountModal);
+  alert("Du har loggats ut.");
+});
+
+if (localStorage.getItem("token")) {
+  document.getElementById("loginText").innerHTML = "Ditt Konto";
+}
