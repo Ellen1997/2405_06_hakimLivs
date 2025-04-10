@@ -827,7 +827,7 @@ footer.footer {
   padding: 2rem;
   gap: 5px;
 }
-#save-product {
+#save-product{
   background: #28a745;
   color: white;
   padding: 10px;
@@ -844,3 +844,40 @@ footer.footer {
 .admin-input-add-category-description {
   width: 25%;
 }
+
+.admin-orders-container{
+  width: 100%;
+}
+.admin-orderlist-container{
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  background-color: var(--box-color);
+  border-radius: 10px;
+  
+}
+.admin-orderlist{
+  display: flex;
+  flex-direction: column;
+  padding-left: 3%;
+  line-height: 10px;
+  
+}
+.status-pending {
+  background-color: yellow;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.status-shipped {
+  background-color: orange;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.status-paid {
+  background-color: rgb(24, 158, 24);
+  padding: 10px;
+  border-radius: 20px;
+}
+
