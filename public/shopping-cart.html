@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/96ad95103a.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js" integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/public/scripts/shopping-cart.js" defer></script>
+    <script src="/public/scripts/index.js" defer></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -25,20 +26,71 @@
         <input type="text" placeholder="Sök..." class="search-input"/>
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
-
+      
       <div class="loginUser">
-          <a href="./login.html" class="login">
-          <img src="./Bilder/person.svg" alt="User icon" />
-          <span>Logga in</span>
+        <button id="userBtn">
+          <a href="#" id="openModalBtn" class="login">
+            <img src="./Bilder/person.svg" alt="User icon" />
+            <span id="loginText">Logga in</span>
           </a>
+        </button>
       </div>
-          <button class="button shoppingcart">
-            <a href="./shopping-cart.html" class="cart">
-              <span id="btn-text">Till kassan</span>
-              <i class="fa-solid fa-cart-shopping shoppingcart"></i>
+      
+      <div id="loginModal" class="modal">
+        <div class="modalContainer">
+          <span id="closeModal" class="close">&times;</span>
+          <h2>VÄLKOMMEN</h2>
+          <form class="loginForm">
+            <input type="email" name="email-input-login" id="email-input-login" class="input email-input-login" autocomplete="username" placeholder="E-postadress" required>
+            <input type="password" name="password-input-login" id="password-input-login" class="input password-input-login" autocomplete="current-password" placeholder="Lösenord" required>
+            <button type="submit" class="loginBtn">Logga in</button>
+          </form>
+          
+          <div class="modalLinks">
+            <a href="#" class="forgotPassword">Glömt Lösenord?</a>
+            <button class="createAccountBtn btn" id="createAccountBtn">Skapa Konto</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="createAccountModal" class="modal">
+        <div class="modalContainer">
+          <span id="closeCreateAccountModal" class="close">&times;</span>
+          <h2>SKAPA KONTO</h2>
+          <form id="registerForm">
+            <input type="email" id="email-input-register" class="registerInput" placeholder="E-postadress" required>
+            <input type="text" id="mobile-input-register" class="registerInput" placeholder="Mobilnummer" required autocomplete="tel">
+            <input type="password" id="password-input-register" class="registerInput" autocomplete="new-password" placeholder="Lösenord" required>
+            <button type="submit" class="loginBtn">Registrera</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="modal" id="accountModal">
+        <div class="modalContainer" id="accountModalContainer">
+          <span id="closeAccountModal" class="close">&times;</span>
+          <h2>HÄRLIGT ATT DU ÄR TILLBAKA</h2>
+          <div id="modalOrder">
+            <i class="fa-solid fa-box"></i>
+            <a href="#" class="inlogBox" id="yourOrder">Dina ordrar</a>
+          </div>
+          <hr>
+          <div id="modalProduct">
+            <i class="fa-solid fa-heart"></i>
+            <a href="#" class="inlogBox" id="YourProduct">Dina produkter</a>
+          </div>
+          <hr>
+          <a href="#" class="inlogBox" id="changePassword">Byt Lösenord</a>
+          <button class="inlogBox" id="logoutBtn">Logga ut</button>
+        </div>
+      </div>
+      
+      <button class="button shoppingcart">
+        <a href="./shopping-cart.html" class="cart">
+          <span id="btn-text">Till kassan</span>
+          <i class="fa-solid fa-cart-shopping shoppingcart"></i>
             </button>
           </a>
-
     </header>
 
     <div class="productPage-mainContainer">
@@ -72,7 +124,7 @@
                       <h2>PRODUKTER</h2>
                       <a href="./products.html">Fortsätt handla</a>
                   </div>
-                  <div class="accountDiv"><p>Har du ett konto?<a href="./login.html">Logga in</a></p></div>
+                  <div class="accountDiv"><p>Produktlista</p></div>
                   <hr style="width:100%;margin-left:0">
                   <div class="cartContainer">
                   </div>
