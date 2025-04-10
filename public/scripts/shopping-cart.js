@@ -82,6 +82,14 @@ let renderCart = () => {
     goToCheckoutBtn.classList.add("goToCheckoutBtn");
     goToCheckoutBtn.innerHTML = "Gå till kassan";
     goToCheckoutBtn.addEventListener("click", () => {
+        const token = localStorage.getItem("token");
+        
+        if(!token) {
+            localStorage.setItem("goToCheckoutAfterLogin", "true");
+            showModal(loginModal);
+            return;
+        }
+
         hideAndShowProduct(cartContainer,goToCheckoutBtn);
         paymentStage(cartProductCardContainer);
     })
@@ -106,6 +114,7 @@ let hideAndShowProduct = (cartContainer,goToCheckoutBtn) => {
     arrowToggle.classList.add("arrowToggle");
     arrowToggle.style.cursor = "pointer";
     arrowToggle.innerHTML = `<i class="fa-solid fa-angle-down" style="color: #F90035;"></i>`;
+
     document.querySelector(".accountDiv").append(arrowToggle);
 
     cartContainer.style.visibility = "hidden";

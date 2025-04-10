@@ -637,7 +637,7 @@ li a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%
+  width: 15rem;
 }
 
 .buyNowBtn{
