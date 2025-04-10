@@ -873,6 +873,7 @@ footer.footer {
   display: flex;
   flex-direction: column;
   padding-left: 3%;
+  line-height: 10px;
   
 }
 .status-pending {
@@ -882,13 +883,13 @@ footer.footer {
 }
 
 .status-shipped {
-  color: orange;
+  background-color: orange;
   padding: 10px;
   border-radius: 20px;
 }
 
 .status-paid {
-  color: green;
+  background-color: rgb(24, 158, 24);
   padding: 10px;
   border-radius: 20px;
 }
