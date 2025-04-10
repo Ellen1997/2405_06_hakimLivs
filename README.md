@@ -26,7 +26,12 @@ Bibliotek:
 
 - Axios – för API-anrop
 
+- Fetch API
+
+- Font Awesome (För ikoner)
+
 ## Hjälp-funktioner (t.ex för API-anrop)
 
 ## Förbättringspunkter
+
 - Styling på Beställningssidan
