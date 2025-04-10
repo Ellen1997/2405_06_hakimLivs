@@ -66,18 +66,32 @@ loginForm.addEventListener("submit", async (e) => {
         body: JSON.stringify({ email, password }),
       }
     );
-
     const data = await response.json();
 
     if (response.ok) {
       localStorage.setItem("token", data.token);
       document.getElementById("loginText").innerHTML = "Ditt Konto";
       hideModal(loginModal);
-      showModal(accountModal);
+      // showModal(accountModal);
+
+      // Om användaren försöker gå till kassan men inte inloggad,skicka vidare till checkout efter inloggning:
+      if (localStorage.getItem("goToCheckoutAfterLogin")) {
+        localStorage.removeItem("goToCheckoutAfterLogin");
+
+        const cartContainer = document.querySelector(".cartContainer");
+        const goToCheckoutBtn = document.querySelector(".goToCheckoutBtn");
+        const cartProductCardContainer = document.querySelector(".cartProductCardContainer");
+
+        hideAndShowProduct(cartContainer, goToCheckoutBtn);
+        paymentStage(cartProductCardContainer);
+      } else {
+          showModal(accountModal);
+        }
+    // slut på kassa kommentar
     } else {
       alert(
         data.error ||
-          "Inloggning misslyckades. Du har uppgett ett felaktigt användarnamn eller lösenord"
+        "Inloggning misslyckades. Du har uppgett ett felaktigt användarnamn eller lösenord"
       );
     }
   } catch (error) {
@@ -90,7 +104,6 @@ registerForm.addEventListener("submit", async (e) => {
   const emailValue = email.value.trim();
   const mobileNumberValue = mobileNumber.value.trim();
   const passwordValue = password.value;
-
   try {
     const response = await fetch(
       "https://be-webshop-2025-fe-two.vercel.app/api/users/register",
@@ -111,14 +124,27 @@ registerForm.addEventListener("submit", async (e) => {
     if (response.ok) {
       localStorage.setItem("token", data.token);
       hideModal(createAccountModal);
-      showModal(accountModal);
+
+      // Om användaren försöker gå till kassan men inte registrerad,skicka vidare till checkout efter registrerad:
+      if (localStorage.getItem("goToCheckoutAfterLogin")) {
+        localStorage.removeItem("goToCheckoutAfterLogin");
+        const cartContainer = document.querySelector(".cartContainer");
+        const goToCheckoutBtn = document.querySelector(".goToCheckoutBtn");
+        const cartProductCardContainer = document.querySelector(".cartProductCardContainer");
+        hideAndShowProduct(cartContainer, goToCheckoutBtn);
+        paymentStage(cartProductCardContainer);
+      } else {
+        showModal(accountModal);
+      }// slut på kassa kommentar
+
     } else {
       alert(data.error || "kunde inte skapa konto.");
     }
   } catch (error) {
-    alert("Någon gick fel vid registering.");
+    alert("Något gick fel vid registrering.");
   }
 });
+
 
 logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("token");
