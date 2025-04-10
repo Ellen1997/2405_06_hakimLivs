@@ -38,17 +38,31 @@
           <span id="closeModal" class="close">&times;</span>
           <h2>VÄLKOMMEN</h2>
           <form class="loginForm">
-            <input type="email" name="username-input-login" id="username-input-login" class="input username-input-login" autocomplete="username" placeholder="E-postadress" required>
+            <input type="email" name="email-input-login" id="email-input-login" class="input email-input-login" autocomplete="username" placeholder="E-postadress" required>
             <input type="password" name="password-input-login" id="password-input-login" class="input password-input-login" autocomplete="current-password" placeholder="Lösenord" required>
             <button type="submit" class="loginBtn">Logga in</button>
           </form>
           
           <div class="modalLinks">
             <a href="#" class="forgotPassword">Glömt Lösenord?</a>
-            <button class="btn-create-account btn" id="btn-create-account">Skapa Konto</button>
+            <button class="createAccountBtn btn" id="createAccountBtn">Skapa Konto</button>
           </div>
         </div>
       </div>
+
+      <div id="createAccountModal" class="modal">
+        <div class="modalContainer">
+          <span id="closeCreateAccountModal" class="close">&times;</span>
+          <h2>SKAPA KONTO</h2>
+          <form id="registerForm">
+            <input type="email" id="email-input-register" class="registerInput" placeholder="E-postadress" required>
+            <input type="text" id="mobile-input-register" class="registerInput" placeholder="Mobilnummer" required autocomplete="tel">
+            <input type="password" id="password-input-register" class="registerInput" autocomplete="new-password" placeholder="Lösenord" required>
+            <button type="submit" class="loginBtn">Registrera</button>
+          </form>
+        </div>
+      </div>
+      
       <div class="modal" id="accountModal">
         <div class="modalContainer" id="accountModalContainer">
           <span id="closeAccountModal" class="close">&times;</span>
